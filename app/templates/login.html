@@ -26,29 +26,12 @@
 		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
 	</script>
 
-	<script>
+	<!<!-- -- <script>
 		$(document).ready(function () {
 			$("form").submit(function (event) {
-				if ($("#pw0").val() !== $("#uname").val()) {
-					if ($("#pw0").val() === $("#pw1").val()) {
-						console.log($(this).serializeArray());
-						$.post("{{url_for('registerauth')}}", $(this).serialize());
-					}
-					else {
-						console.log("they dont match fool");
-						$("#passwordnomatch").css("display", "inline");
-						$("#unamesamepassword").css("display", "none");
-					}
-				}
-				else {
-					$("#passwordnomatch").css("display", "none");
-					$("#unamesamepassword").css("display", "inline");
-				}
-				
-				event.preventDefault();
-
-			});
+				$.post("{{url_for('userexists')}}", $(this).serialize(), response => {console.log(response)});
+				event.preventDefault()
 		});
-	</script>
+	</script> -->
 </body>
-</html>
+</html> -->
