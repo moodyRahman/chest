@@ -7,8 +7,14 @@ app = Flask(__name__)
 
 app.secret_key = "debug"
 
-@app.route("/")
+
+@app.route("/", methods=['GET'])
 def index():
+	if "user" in session:
+		return render_template("home.html")
+	return redirect(url_for("login"))
+
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
 	if request.method == "POST":
