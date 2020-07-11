@@ -63,8 +63,8 @@ def register():
 			flash("username already exists")
 			return redirect(url_for("register"))
 		print(users)
-	salt = urandom(64).hex()
-
+		salt = urandom(64).hex()
+		
 		hashedpassword = hashlib.sha512(
 		(pw0 + salt).encode("utf-8")).digest().hex()
 		newuser = db.UserInfo(username=username, hashed_password=hashedpassword, salt=salt).save()
