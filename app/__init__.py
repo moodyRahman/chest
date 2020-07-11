@@ -52,7 +52,7 @@ def register():
 			flash("username can't be the same as the password")
 			return redirect(url_for("register"))
 		users = db.UserInfo.objects(username = request.form["username"])
-		if not users:
+		if users:
 			flash("username already exists")
 			return redirect(url_for("register"))
 		print(users)
