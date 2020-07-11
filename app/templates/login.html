@@ -1,28 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login | Chest</title>
-</head>
-<body>
-	<form action="{{url_for('login')}}" method="post">
-		<input type="text" name="username" id="">
-		<input type="password" name="password" id="">
-		<input type="submit" value="LOGIN">
-	</form>
-	<br>
-	<br>
-	<a href="{{url_for('register')}}">REGISTER</a>
-	{% with messages = get_flashed_messages() %}
-	{% if messages %}
-	<ul class=flashes>
-		{% for message in messages %}
-		{{ message }}<br>
-		{% endfor %}
-	</ul>
-	{% endif %}
-	{% endwith %}
-	
-</body>
-</html>
+{% extends "_base.html" %}
+{% block title %} Login | Chest {% endblock title %}
+
+{% block head %} {% endblock head %}
+{% block body %}
+
+<form action="{{url_for('login')}}" method="post">
+	username: <input type="text" name="username" class="form-control">
+	password: <input type="password" name="password" class="form-control">
+	<br> <br>
+	<input type="submit" value="LOGIN" class="btn">
+</form>
+{% endblock body %}

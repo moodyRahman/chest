@@ -1,25 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Home | Chest</title>
-</head>
-<body>
-	Hello {{session["user"]}}!!
+{% extends "_base.html" %}
+{% block title %} Login | Chest {% endblock title %}
 
-	<form action="{{url_for('logout')}}" method="post">
-		<button type="submit">LOGOUT</button>
-	</form>
+{% block head %} {% endblock head %}
+{% block body %}
 
-	{% with messages = get_flashed_messages() %}
-	{% if messages %}
-	<ul class=flashes>
-		{% for message in messages %}
-		{{ message }}<br>
-		{% endfor %}
-	</ul>
-	{% endif %}
-	{% endwith %}
-</body>
-</html>
+<div>
+	<h2>Hello {{session["user"]}}</h2>
+</div>
+<br>
+<br>
+
+{% endblock body %}
