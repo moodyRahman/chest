@@ -24,13 +24,17 @@ class UserInfo(mg.Document):
 	allcharacters = mg.EmbeddedDocumentListField(Character)
 	pass
 
-class Campaign(mg.Document):
-	dm = mg.EmbeddedDocument(UserInfo)
-	players = mg.EmbeddedDocumentListField(UserInfo)
-	pass
 
 class NPC(mg.EmbeddedDocument):
 	name = mg.StringField()
 	race = mg.StringField()
 	description = mg.StringField()
 	secrets = mg.StringField()
+
+
+class Campaign(mg.Document):
+	dm = mg.StringField()
+	# if dm field matches the username in session, enable dm mode
+	allplayers = mg.EmbeddedDocumentListField(Character)
+	allnpc = mg.EmbeddedDocumentListField(NPC)
+	pass
