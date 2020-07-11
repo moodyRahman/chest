@@ -63,27 +63,14 @@ def register():
 			flash("username already exists")
 			return redirect(url_for("register"))
 		print(users)
-		return "a"
-	return render_template("login.html")
-
-@app.route("/registerauth", methods=["POST"])
-def registerauth():
-	print(request.form)
 	salt = urandom(64).hex()
-	username = request.form["username"]
-	hashedpassword = hashlib.sha512((request.form["password0"] + salt).encode("utf-8")).digest().hex()
-	print(username, salt, hashedpassword)
-	newuser = db.UserInfo(username = username, hashed_password = hashedpassword, salt = salt).save()
-	return "a"
 
-@app.route("/registerauth/query")
-def userexists():
-	# users = db.UserInfo.objects(username = request.form["username"])
-	# if users:
-	# 	return {"response":True}
-	print(request.args)
-	return {"response":False}
-	pass
+		hashedpassword = hashlib.sha512(
+		(pw0 + salt).encode("utf-8")).digest().hex()
+		newuser = db.UserInfo(username=username, hashed_password=hashedpassword, salt=salt).save()
+		session["user"] = username
+		return redirect(url_for("index"))
+	return render_template("register.html")
 
 @app.route("/debug")
 def deb():
