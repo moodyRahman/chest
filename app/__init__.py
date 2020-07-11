@@ -37,6 +37,13 @@ def login():
 	return render_template("login.html")
 
 
+@app.route("/logout", methods=['POST'])
+def logout():
+	session.pop("user")
+	flash("successful log out")
+	return redirect(url_for("login"))
+	pass
+
 @app.route("/register", methods=['GET', 'POST'])
 def register():
 	if request.method == "POST":
