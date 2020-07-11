@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Register</title>
+</head>
+<body>
+	<form action="{{url_for('register')}}" method="post" id="registerform">
+		username <input type="text" name="username" id="uname"> <br>
+		password <input type="password" name="password0" id="pw0"> <br>
+		confirm password <input type="password" name="password1" id="pw1"> <br>
+		<button type="submit"> SUBMIT</button>
+	</form>
+
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<ul class=flashes>
+		{% for message in messages %}
+		{{ message }}<br>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{% endwith %}
+</body>
+</html>
