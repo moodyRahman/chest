@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Register</title>
-</head>
-<body>
-	<form action="{{url_for('register')}}" method="post" id="registerform">
-		username <input type="text" name="username" id="uname"> <br>
-		password <input type="password" name="password0" id="pw0"> <br>
-		confirm password <input type="password" name="password1" id="pw1"> <br>
-		<button type="submit"> SUBMIT</button>
-	</form>
+{% extends "_base.html" %}
+{% block title %} Login | Chest {% endblock title %}
 
-	{% with messages = get_flashed_messages() %}
-	{% if messages %}
-	<ul class=flashes>
-		{% for message in messages %}
-		{{ message }}<br>
-		{% endfor %}
-	</ul>
-	{% endif %}
-	{% endwith %}
-</body>
-</html>
+{% block head %} {% endblock head %}
+{% block body %}
+
+<h1>REGISTER</h1>
+
+<form action="{{url_for('register')}}" method="post" id="registerform">
+	username <input type="text" name="username" id="uname" class="form-control"> <br>
+	password <input type="password" name="password0" id="pw0" class="form-control"> <br>
+	confirm password <input type="password" name="password1" id="pw1" class="form-control"> <br>
+	<button type="submit" class="btn btn-primary btn-lg btn-block"> SUBMIT</button>
+</form>
+{% endblock body %}
