@@ -1,6 +1,8 @@
 import mongoengine as mg
+from os import environ
 
-mg.connect("sitedata")
+mg.connect("sitedata", 
+	host=environ["atlasurl"])
 
 class Character(mg.EmbeddedDocument):
 	name = mg.StringField()
