@@ -9,7 +9,27 @@ app.secret_key = "debug"
 
 @app.route("/")
 def index():
-	return "hewwo"
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+	if request.method == "POST":
+		inputs = request.form.to_dict()
+		users = db.UserInfo.objects(username=inputs["username"])
+		if users:
+			password = inputs["password"]
+			salt = users[0]["salt"]
+			hashedpasswordcalc = hashlib.sha512(
+                            (password + salt).encode("utf-8")).digest().hex()
+			if hashedpasswordcalc == users[0]["hashed_password"]:
+				session["user"] = users[0]["username"]
+				flash("sucessfully logged in")
+				return redirect(url_for("index"))
+			flash("incorrect password")
+			return redirect(url_for("login"))
+		else:
+			flash("username not found")
+			return redirect(url_for("login"))
+	return render_template("login.html")
+
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
