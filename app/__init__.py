@@ -72,6 +72,24 @@ def register():
 		return redirect(url_for("index"))
 	return render_template("register.html")
 
+@app.route("/characters", methods=["GET", "POST"])
+def characters():
+	if request.method == "GET":
+		allchars = db.UserInfo.objects(username=session["user"])[0].allcharacters
+
+		return render_template("characters.html", characters=allchars)
+
+
+	inputs = request.form.to_dict()
+	newc = db.Character(name = inputs["name"], ptype=inputs["class"])
+	users = db.UserInfo.objects(username=session["user"])
+	user = users[0]
+	user.allcharacters.append(newc)
+	print(user.username)
+	user.save()
+	return redirect(url_for("characters"))
+
+
 @app.route("/debug")
 def deb():
 	return request.form
