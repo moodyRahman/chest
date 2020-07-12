@@ -27,12 +27,12 @@ def login():
                             (password + salt).encode("utf-8")).digest().hex()
 			if hashedpasswordcalc == users[0]["hashed_password"]:
 				session["user"] = users[0]["username"]
-				flash("sucessfully logged in")
+				flash("sucessfully logged in", "success")
 				return redirect(url_for("index"))
-			flash("incorrect password")
+			flash("incorrect password", "danger")
 			return redirect(url_for("login"))
 		else:
-			flash("username not found")
+			flash("username not found", "primary")
 			return redirect(url_for("login"))
 	return render_template("login.html")
 
@@ -40,7 +40,7 @@ def login():
 @app.route("/logout", methods=['POST', 'GET'])
 def logout():
 	session.pop("user")
-	flash("successful log out")
+	flash("successful log out", "success")
 	return redirect(url_for("login"))
 	pass
 
@@ -53,14 +53,14 @@ def register():
 		pw0 = inputs["password0"]
 		pw1 = inputs["password1"]
 		if pw0 != pw1:
-			flash("passwords have to match")
+			flash("passwords have to match", "warning")
 			return redirect(url_for("register"))
 		if username == pw0:
-			flash("username can't be the same as the password")
+			flash("username can't be the same as the password", "warning")
 			return redirect(url_for("register"))
 		users = db.UserInfo.objects(username = request.form["username"])
 		if users:
-			flash("username already exists")
+			flash("username already exists", "warning")
 			return redirect(url_for("register"))
 		print(users)
 		salt = urandom(64).hex()
