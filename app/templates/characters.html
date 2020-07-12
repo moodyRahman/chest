@@ -1,0 +1,27 @@
+{% extends "_base.html" %}
+{% block title %} Login | Chest {% endblock title %}
+
+{% block head %} {% endblock head %}
+{% block body %}
+
+{% if characters %}
+CHARACTERS
+{% for char in characters %}
+<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+	<div class="card-body">
+		<h4 class="card-title">{{char.name}}</h4>
+		<p class="card-text">{{char.ptype}}</p>
+	</div>
+</div>
+{% endfor %}
+{% endif %}
+
+<h4>Make a new Character</h4>
+<form action="{{url_for('characters')}}" method="post">
+	Name: <input type="text" name="name" class="form-control">
+	Class: <input type="text" name="class" class="form-control">
+	<input type="submit" value="upload" class="btn btn-outline-primary">
+</form>
+
+
+{% endblock body %}
