@@ -1,10 +1,10 @@
 import mongoengine as mg
 from os import environ
 
-# mg.connect("sitedata", 
-# 	host=environ["atlasurl"])
+mg.connect("sitedata", 
+	host=environ["atlasurl"])
 
-mg.connect("sitedata")
+# mg.connect("sitedata")
 
 class Character(mg.Document):
 	name = mg.StringField()
