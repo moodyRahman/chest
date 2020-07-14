@@ -1,14 +1,18 @@
 import mongoengine as mg
 from os import environ
 
-mg.connect("sitedata", 
-	host=environ["atlasurl"])
+# mg.connect("sitedata", 
+# 	host=environ["atlasurl"])
 
-class Character(mg.EmbeddedDocument):
+mg.connect("sitedata")
+
+class Character(mg.Document):
 	name = mg.StringField()
 	ptype = mg.StringField() # class
 	inventory = mg.ListField(mg.StringField())
+	charid = mg.IntField()
 	pass
+
 
 class Item(mg.EmbeddedDocument):
 	name = mg.StringField()
@@ -19,14 +23,6 @@ class Item(mg.EmbeddedDocument):
 	equipped = mg.BooleanField()
 
 
-class UserInfo(mg.Document):
-	username = mg.StringField()
-	hashed_password = mg.StringField()
-	salt = mg.StringField()
-	allcharacters = mg.EmbeddedDocumentListField(Character)
-	pass
-
-
 class NPC(mg.EmbeddedDocument):
 	name = mg.StringField()
 	race = mg.StringField()
@@ -34,9 +30,24 @@ class NPC(mg.EmbeddedDocument):
 	secrets = mg.StringField()
 
 
+class Location(mg.EmbeddedDocument):
+	description = mg.StringField()
+	residents = mg.EmbeddedDocumentListField(NPC)
+	pass
+
+
+class UserInfo(mg.Document):
+	username = mg.StringField()
+	hashed_password = mg.StringField()
+	salt = mg.StringField()
+	allcharacters = mg.ListField(mg.ReferenceField("Character"))
+	allcampaigns = mg.ListField(mg.ReferenceField("Campaign"))
+	pass
+
 class Campaign(mg.Document):
-	dm = mg.StringField()
-	# if dm field matches the username in session, enable dm mode
-	allplayers = mg.EmbeddedDocumentListField(Character)
+	dm = mg.ListField(mg.StringField)
+	players = mg.ListField(mg.StringField)
+	characters = mg.ListField(mg.ReferenceField("Character"))
 	allnpc = mg.EmbeddedDocumentListField(NPC)
+	alllocation = mg.EmbeddedDocumentField(Location)
 	pass
