@@ -4,16 +4,18 @@
 {% block head %} {% endblock head %}
 {% block body %}
 
-<h2>
-	{{char.name}}
 
-</h2>
 
-<br>
+<div class="jumbotron">
 
-<h3>
-	{{char.ptype}}
-</h3>
+	<h2>{{char.name}}</h2>
+
+
+
+	<h4 class="text-muted">{{char.ptype}}</h4>
+
+</div>
+
 
 {% if char.inventory %}
 
@@ -41,13 +43,15 @@
 
 
 {% endif %}
+<div class="jumbotron">
 
-<h4>Add Item</h4>
-<form action="{{url_for('viewcharacter', charid=char.charid)}}" method="post">
-	Name: <input type="text" name="name" class="form-control">
-	Description: <input type="text" name="description" class="form-control">
-	<input type="submit" value="upload" class="btn btn-outline-primary">
-</form>
-
+	<h4>Add Item</h4>
+	<form action="{{url_for('viewcharacter', charid=char.charid)}}" method="post">
+		Name: <input type="text" name="name" class="form-control" placeholder="Item name">
+		Description: <input type="text" name="description" class="form-control" placeholder="Description">
+		<input type="submit" value="upload" class="btn btn-outline-primary">
+	</form>
+	
+</div>
 
 {% endblock body %}
