@@ -24,3 +24,11 @@ def force_logout(route):
 		return route(*args, **kwargs)
 
 	return wrapper
+
+def home_upon_error(route):
+	@wraps(route)
+	def wrapper(*args, **kwargs):
+		try:
+			return route(*args, **kwargs)
+		except:
+			pass
