@@ -89,6 +89,19 @@ def characters():
 	user.save()
 	return redirect(url_for("characters"))
 
+@app.route("/campaigns", methods=["GET", "POST"])
+@dec.login_required
+def campaign():
+	if request.method == "POST":
+		inputs = request.form.to_dict()
+		newc = db.Campaign(dm=session["user"], name = inputs["name"]).save()
+		user = db.UserInfo.objects(username=session["user"])[0]
+		user.allcampaigns.append(newc)
+		user.save()
+		return redirect(url_for("campaign"))
+	campaign = db.UserInfo.objects(username=session["user"])[0].allcampaigns
+
+	return render_template("campaigns.html", campaigns = campaign)
 
 @app.route("/debug")
 def deb():
