@@ -1,10 +1,12 @@
 import mongoengine as mg
 from os import environ
 
-mg.connect("sitedata", 
-	host=environ["atlasurl"])
+if environ["chest_debug"] == "true":
+	mg.connect("sitedata")
+else:
+	mg.connect("sitedata", 
+		host=environ["atlasurl"])
 
-# mg.connect("sitedata")
 
 
 class Item(mg.EmbeddedDocument):
