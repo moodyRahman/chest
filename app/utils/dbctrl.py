@@ -6,13 +6,6 @@ from os import environ
 
 mg.connect("sitedata")
 
-class Character(mg.Document):
-	name = mg.StringField()
-	ptype = mg.StringField() # class
-	inventory = mg.ListField(mg.StringField())
-	charid = mg.IntField()
-	pass
-
 
 class Item(mg.EmbeddedDocument):
 	name = mg.StringField()
@@ -21,6 +14,16 @@ class Item(mg.EmbeddedDocument):
 	weight = mg.FloatField()
 	tags = mg.ListField(mg.StringField)
 	equipped = mg.BooleanField()
+	itemid = mg.IntField()
+
+
+class Character(mg.Document):
+	name = mg.StringField()
+	ptype = mg.StringField() # class
+	# inventory = mg.ListField(mg.StringField())
+	inventory = mg.EmbeddedDocumentListField(Item)
+	charid = mg.IntField()
+	pass
 
 
 class NPC(mg.EmbeddedDocument):
