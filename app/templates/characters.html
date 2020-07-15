@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% block title %} Login | Chest {% endblock title %}
+{% block title %} Characters | Chest {% endblock title %}
 
 {% block head %} {% endblock head %}
 {% block body %}
@@ -7,12 +7,14 @@
 {% if characters %}
 CHARACTERS
 {% for char in characters %}
-<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-	<div class="card-body">
-		<h4 class="card-title">{{char.name}}</h4>
-		<p class="card-text">{{char.ptype}}</p>
+<a href="{{url_for('viewcharacter', charid=char.charid)}}">
+	<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+		<div class="card-body">
+			<h4 class="card-title">{{char.name}}</h4>
+			<p class="card-text">{{char.ptype}}</p>
+		</div>
 	</div>
-</div>
+</a>
 {% endfor %}
 {% endif %}
 
