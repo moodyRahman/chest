@@ -45,7 +45,8 @@ class UserInfo(mg.Document):
 	pass
 
 class Campaign(mg.Document):
-	dm = mg.ListField(mg.StringField)
+	name = mg.StringField()
+	dm = mg.StringField()
 	players = mg.ListField(mg.StringField)
 	characters = mg.ListField(mg.ReferenceField("Character"))
 	allnpc = mg.EmbeddedDocumentListField(NPC)
