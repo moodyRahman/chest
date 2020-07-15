@@ -1,0 +1,53 @@
+{% extends "_base.html" %}
+{% block title %} {{char.name}} | Chest {% endblock title %}
+
+{% block head %} {% endblock head %}
+{% block body %}
+
+<h2>
+	{{char.name}}
+
+</h2>
+
+<br>
+
+<h3>
+	{{char.ptype}}
+</h3>
+
+{% if char.inventory %}
+
+
+
+<table class="table table-hover">
+	<thead>
+		<th scope="col">Name</th>
+		<th scope="col">Description</th>
+	</thead>
+
+	{% for item in char.inventory %}
+	<tbody>
+		<th>{{item.name}}</th>
+		<td>{{item.description}}</td>
+	</tbody>
+	{% endfor %}
+
+
+</table>
+
+{%else %}
+
+<h4>no inventory data availible</h4>
+
+
+{% endif %}
+
+<h4>Add Item</h4>
+<form action="{{url_for('viewcharacter', charid=char.charid)}}" method="post">
+	Name: <input type="text" name="name" class="form-control">
+	Description: <input type="text" name="description" class="form-control">
+	<input type="submit" value="upload" class="btn btn-outline-primary">
+</form>
+
+
+{% endblock body %}
