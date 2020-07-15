@@ -1,0 +1,26 @@
+{% extends "_base.html" %}
+{% block title %} Login | Chest {% endblock title %}
+
+{% block head %} {% endblock head %}
+{% block body %}
+
+{% if campaigns %}
+CAMPAIGNS
+{% for champ in campaigns %}
+<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+	<div class="card-body">
+		<h4 class="card-title">{{champ.dm}}</h4>
+		<p class="card-text">{{champ.name}}</p>
+	</div>
+</div>
+{% endfor %}
+{% endif %}
+
+<h4>Make a new Campaign</h4>
+<form action="{{url_for('campaign')}}" method="post">
+	Name: <input type="text" name="name" class="form-control">
+	<input type="submit" value="upload" class="btn btn-outline-primary">
+</form>
+
+
+{% endblock body %}
