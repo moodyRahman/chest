@@ -1,5 +1,6 @@
 from flask import *
 from .utils import dbctrl as db
+from .utils import decorators as dec 
 from os import urandom
 import hashlib
 
@@ -16,6 +17,7 @@ def index():
 
 
 @app.route("/login", methods=['GET', 'POST'])
+@dec.force_logout
 def login():
 	if request.method == "POST":
 		inputs = request.form.to_dict()
@@ -73,13 +75,11 @@ def register():
 	return render_template("register.html")
 
 @app.route("/characters", methods=["GET", "POST"])
+@dec.login_required
 def characters():
 	if request.method == "GET":
 		allchars = db.UserInfo.objects(username=session["user"])[0].allcharacters
 		return render_template("characters.html", characters=allchars)
-
-
-
 	inputs = request.form.to_dict()
 	newc = db.Character(name = inputs["name"], ptype=inputs["class"]).save()
 	users = db.UserInfo.objects(username=session["user"])
