@@ -1,5 +1,6 @@
 from flask import *
 from .utils import dbctrl as db
+from .utils import decorators as dec 
 from os import urandom
 import hashlib
 
@@ -16,6 +17,7 @@ def index():
 
 
 @app.route("/login", methods=['GET', 'POST'])
+@dec.force_logout
 def login():
 	if request.method == "POST":
 		inputs = request.form.to_dict()
@@ -73,22 +75,61 @@ def register():
 	return render_template("register.html")
 
 @app.route("/characters", methods=["GET", "POST"])
+@dec.login_required
 def characters():
 	if request.method == "GET":
 		allchars = db.UserInfo.objects(username=session["user"])[0].allcharacters
 		return render_template("characters.html", characters=allchars)
-
-
-
 	inputs = request.form.to_dict()
-	newc = db.Character(name = inputs["name"], ptype=inputs["class"]).save()
 	users = db.UserInfo.objects(username=session["user"])
 	user = users[0]
+	c = len(user.allcharacters) + 1
+	newc = db.Character(name = inputs["name"], ptype=inputs["class"], charid=c).save()
 	user.allcharacters.append(newc)
 	print(user.username)
 	user.save()
 	return redirect(url_for("characters"))
 
+
+@app.route("/characters/view/<int:charid>", methods=["GET", "POST"])
+@dec.login_required
+def viewcharacter(charid):
+	if request.method == "GET":
+		user = db.UserInfo.objects(username=session["user"])[0]
+		for x in user.allcharacters:
+			if x.charid == charid:
+				return render_template("singlechar.html", char = x)
+				pass
+			pass
+
+		return redirect(url_for("characters"))
+	
+	user = db.UserInfo.objects(username=session["user"])[0]
+	inputs = request.form.to_dict()
+	for x in user.allcharacters:
+		if x.charid == charid:
+			newi = db.Item(name = inputs["name"], description=inputs["description"])
+			x.inventory.append(newi)
+			x.save()
+			return render_template("singlechar.html", char=x)
+		pass
+	print("============")
+	print(charid)
+	return redirect(url_for("viewcharacter"))
+
+@app.route("/campaigns", methods=["GET", "POST"])
+@dec.login_required
+def campaign():
+	if request.method == "POST":
+		inputs = request.form.to_dict()
+		newc = db.Campaign(dm=session["user"], name = inputs["name"]).save()
+		user = db.UserInfo.objects(username=session["user"])[0]
+		user.allcampaigns.append(newc)
+		user.save()
+		return redirect(url_for("campaign"))
+	campaign = db.UserInfo.objects(username=session["user"])[0].allcampaigns
+
+	return render_template("campaigns.html", campaigns = campaign)
 
 @app.route("/debug")
 def deb():
