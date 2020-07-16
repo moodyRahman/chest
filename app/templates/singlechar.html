@@ -27,13 +27,18 @@
 		<th scope="col" class="text-primary">Description</th>
 	</thead>
 
-	{% for item in char.inventory %}
 	<tbody class="text-secondary">
+	{% for item in char.inventory %}
+	
+	<tr>
+		<td style="display:none">{{item.itemid}}</td>
 		<td>{{item.name}}</td>
 		<td>{{item.description}}</td>
-		<td class="text-right"><button class="btn btn-info" onclick="itemeditor(self)">edit</button></td>
+		<td class="text-right" contenteditable="false"><button class="btn btn-outline-info" onclick="itemeditor(this)">edit</button></td>	
+	</tr>
+		{% endfor %}
+	
 	</tbody>
-	{% endfor %}
 
 
 </table>
@@ -48,17 +53,18 @@
 
 	<h4>Add Item</h4>
 	<form action="{{url_for('viewcharacter', charid=char.charid)}}" method="post">
-		Name: <input type="text" name="name" class="form-control" placeholder="Item name">
-		Description: <input type="text" name="description" class="form-control" placeholder="Description">
-		<input type="submit" value="upload" class="btn btn-outline-primary">
+		<input type="text" name="name" class="form-control" placeholder="Item name">
+		<input type="text" name="description" class="form-control" placeholder="Description">
+		<input type="submit" value="upload" class="btn btn-primary">
 	</form>
 	
 </div>
 
 <script>
-$(document).ready(function () {
-		console.log("ready!");
-	});
+	charid = {{ char.charid|safe }};
+	url = "{{url_for('updateitem') | safe}}";
 </script>
+
+<script src="/static/itemupdate.js"></script>
 
 {% endblock body %}
