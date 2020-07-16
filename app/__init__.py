@@ -3,6 +3,7 @@ from .utils import dbctrl as db
 from .utils import decorators as dec 
 from os import urandom
 import hashlib
+import random
 
 app = Flask(__name__)
 
@@ -83,7 +84,7 @@ def characters():
 	inputs = request.form.to_dict()
 	users = db.UserInfo.objects(username=session["user"])
 	user = users[0]
-	c = len(user.allcharacters) + 1
+	c = int(random.random() * 100000000000000)
 	newc = db.Character(name = inputs["name"], ptype=inputs["class"], charid=c).save()
 	user.allcharacters.append(newc)
 	print(user.username)
@@ -95,14 +96,18 @@ def characters():
 @dec.login_required
 def viewcharacter(charid):
 	if request.method == "GET":
-		user = db.UserInfo.objects(username=session["user"])[0]
-		for x in user.allcharacters:
-			if x.charid == charid:
-				return render_template("singlechar.html", char = x)
-				pass
-			pass
+		char = db.Character.objects(charid = charid)[0]
+		return render_template("singlechar.html", char = char)
 
-		return redirect(url_for("characters"))
+	inputs = request.form.to_dict()
+	char = db.Character.objects(charid=charid)[0]
+	itemid = int(random.random() * 100000000000000000)
+	newi = db.Item(name=inputs["name"], description=inputs["description"], itemid = itemid)
+	char.inventory.append(newi)
+	char.save()
+	print("============")
+	print(charid)
+	return redirect(url_for("viewcharacter", charid = charid))
 	
 	user = db.UserInfo.objects(username=session["user"])[0]
 	inputs = request.form.to_dict()
