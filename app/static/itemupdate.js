@@ -15,6 +15,8 @@ function itemeditor(elem) {
 function updateitem(elem) {
 	self = $(elem);
 	row = self.parent().parent();
+	// print(row)
+	console.log(row)
 	kids = row.children();
 	itemid = parseInt(kids[0].innerHTML);
 	itemname = kids[1].innerHTML;

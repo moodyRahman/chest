@@ -141,7 +141,8 @@ def campaign():
 
 @app.route("/debug")
 def deb():
-	return request.form
+
+	return render_template("debug.html")
 
 if __name__ == "__main__":
 	app.run()
