@@ -98,7 +98,7 @@ def viewcharacter(charid):
 	if request.method == "GET":
 		char = db.Character.objects(charid = charid)[0]
 		return render_template("singlechar.html", char = char)
-
+	
 	inputs = request.form.to_dict()
 	char = db.Character.objects(charid=charid)[0]
 	itemid = int(random.random() * 100000000000000000)
@@ -108,19 +108,22 @@ def viewcharacter(charid):
 	print("============")
 	print(charid)
 	return redirect(url_for("viewcharacter", charid = charid))
-	
-	user = db.UserInfo.objects(username=session["user"])[0]
+
+
+@app.route("/characters/update", methods=["POST"])
+def updateitem():
 	inputs = request.form.to_dict()
-	for x in user.allcharacters:
-		if x.charid == charid:
-			newi = db.Item(name = inputs["name"], description=inputs["description"])
-			x.inventory.append(newi)
-			x.save()
-			return render_template("singlechar.html", char=x)
-		pass
-	print("============")
-	print(charid)
-	return redirect(url_for("viewcharacter"))
+	char = db.Character.objects(charid = inputs["charid"])[0]
+	for x in char.inventory:
+		print(x.itemid)
+		if x.itemid == int(inputs["itemid"]):
+			print("here")
+			x.name = inputs["itemname"]
+			x.description = inputs["description"]
+			char.save()
+	print(inputs)
+	return redirect(url_for("viewcharacter", charid = inputs["charid"]))
+	pass
 
 @app.route("/campaigns", methods=["GET", "POST"])
 @dec.login_required
