@@ -18,7 +18,6 @@ else:
 app.secret_key = "debug"
 
 @app.route("/", methods=['GET'])
-# @dec.nonexistant_user_handler
 @dec.login_required
 def index():
 	if "user" in session:
