@@ -1,11 +1,19 @@
 from flask import *
 from .utils import dbctrl as db
 from .utils import decorators as dec 
-from os import urandom
+from os import urandom, environ
 import hashlib
 import random
 
 app = Flask(__name__)
+
+
+if environ["chest_debug"] == "true":
+	app.secret_key = "debug"
+else:
+	app.secret_key = urandom(32)
+
+
 
 app.secret_key = "debug"
 
