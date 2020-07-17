@@ -20,3 +20,13 @@ The source code is open! All passwords are hashed and salted and no other user i
 6) edit your environmental variables such that `$chest_debug` is `"true"` if you wish to connect to a local instance of mongodb, and `$atlasurl` to the URI of a remote mongodb
   6a) These variables are referred to in `app/utils/dbctrl.py` and `app/__init__.py`. If you wish to use different variables, feel free to change it around. 
 7) Distribute the URL to your users
+
+#### Technologies used
+- Mongodb
+- MongoEngine
+- Flask
+- Jinja
+- Bootstrap
+- A hint of JavaScript
+- a lot of Pizza
+- and Love
