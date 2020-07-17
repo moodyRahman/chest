@@ -21,23 +21,24 @@
 
 
 
-<table class="table table-hover">
+<table class="table table-hover header-fixed">
 	<thead>
 		<th scope="col" class="text-primary">Name</th>
 		<th scope="col" class="text-primary">Description</th>
 	</thead>
 
 	<tbody class="text-secondary">
-	{% for item in char.inventory %}
-	
-	<tr>
-		<td style="display:none">{{item.itemid}}</td>
-		<td>{{item.name}}</td>
-		<td>{{item.description}}</td>
-		<td class="text-right" contenteditable="false"><button class="btn btn-outline-info" onclick="itemeditor(this)">edit</button></td>	
-	</tr>
+		{% for item in char.inventory %}
+
+		<tr>
+			<td style="display:none">{{item.itemid}}</td>
+			<td>{{item.name}}</td>
+			<td>{{item.description}}</td>
+			<td class="text-right" contenteditable="false"><button class="btn btn-outline-info"
+					onclick="itemeditor(this)">edit</button></td>
+		</tr>
 		{% endfor %}
-	
+
 	</tbody>
 
 
@@ -57,11 +58,11 @@
 		<input type="text" name="description" class="form-control" placeholder="Description">
 		<input type="submit" value="upload" class="btn btn-primary">
 	</form>
-	
+
 </div>
 
 <script>
-	charid = {{ char.charid|safe }};
+	charid = {{ char.charid | safe }};
 	url = "{{url_for('updateitem') | safe}}";
 </script>
 
