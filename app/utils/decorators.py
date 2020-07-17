@@ -1,5 +1,6 @@
 from flask import session, redirect, url_for
 from functools import wraps
+import app.utils.dbctrl as db
 
 
 def login_required(route):
@@ -25,11 +26,13 @@ def force_logout(route):
 
 	return wrapper
 
-def home_upon_error(route):
+def nonexistant_user_handler(route):
 	@wraps(route)
 	def wrapper(*args, **kwargs):
-		try:
-			return route(*args, **kwargs)
-		except:
-			session.pop("user")
-			return redirect(url_for("index"))
+		if "user" in session:
+			if len(db.UserInfo.objects(username = session["user"])) == 0:
+				session.pop("user")
+				return redirect(url_for("login"))
+		return route(*args, **kwargs)
+	
+	return wrapper
