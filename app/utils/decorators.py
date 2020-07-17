@@ -9,10 +9,13 @@ def login_required(route):
 	@wraps(route)
 	def wrapper(*args, **kwargs):
 		if 'user' in session:
-			return route(*args, **kwargs)
+			if len(db.UserInfo.objects(username=session["user"])) == 0:
+				session.pop("user")
+				return redirect(url_for("login"))
+			else:
+				return route(*args, **kwargs)
 		else:
-			return redirect(url_for('login'))
-	
+			return redirect(url_for('login'))	
 	return wrapper
 
 
@@ -24,15 +27,4 @@ def force_logout(route):
 		session.pop('user', None)
 		return route(*args, **kwargs)
 
-	return wrapper
-
-def nonexistant_user_handler(route):
-	@wraps(route)
-	def wrapper(*args, **kwargs):
-		if "user" in session:
-			if len(db.UserInfo.objects(username = session["user"])) == 0:
-				session.pop("user")
-				return redirect(url_for("login"))
-		return route(*args, **kwargs)
-	
 	return wrapper
