@@ -31,4 +31,5 @@ def home_upon_error(route):
 		try:
 			return route(*args, **kwargs)
 		except:
-			pass
+			session.pop("user")
+			return redirect(url_for("index"))
