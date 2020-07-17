@@ -52,7 +52,7 @@
 <div class="jumbotron">
 
 	<h4>Add Item</h4>
-	<form action="{{url_for('viewcharacter', charid=char.charid)}}" method="post">
+	<form action="{{url_for('viewcharacter', charid=char.charid)}}" method="post" autocomplete="off">
 		<input type="text" name="name" class="form-control" placeholder="Item name">
 		<input type="text" name="description" class="form-control" placeholder="Description">
 		<input type="submit" value="upload" class="btn btn-primary">

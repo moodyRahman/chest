@@ -17,7 +17,7 @@ CAMPAIGNS
 {% endif %}
 
 <h4>Make a new Campaign</h4>
-<form action="{{url_for('campaign')}}" method="post">
+<form action="{{url_for('campaign')}}" method="post" autocomplete="off">
 	Name: <input type="text" name="name" class="form-control">
 	<input type="submit" value="upload" class="btn btn-outline-primary">
 </form>

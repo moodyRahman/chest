@@ -19,7 +19,7 @@ CHARACTERS
 {% endif %}
 
 <h4>Make a new Character</h4>
-<form action="{{url_for('characters')}}" method="post">
+<form action="{{url_for('characters')}}" method="post" autocomplete="off">
 	Name: <input type="text" name="name" class="form-control">
 	Class: <input type="text" name="class" class="form-control">
 	<input type="submit" value="upload" class="btn btn-outline-primary">
