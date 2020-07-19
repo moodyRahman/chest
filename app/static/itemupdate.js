@@ -8,11 +8,13 @@ function itemeditor(elem) {
 	console.log(itemnamenode.text())
 	console.log(itemdescriptionnode.text())
 
-	itemnamefield = $('<input type="text" style="display : inline;" class="form-control md-form" />')
+	itemnamefield = $('<input type="text" style="height:100%; display : inline;" class="form-control md-form" />')
+	// itemnamefield = $('<textarea style="display : inline;" class="form-control md-form" />')
 	itemnamefield.val(itemnamenode.text())
 	itemnamefield.attr("id", itemid + "_name")
 
-	itemdescfield = $(('<input type="text" style="display : inline;" class="form-control md-form" />'))
+	// itemdescfield = $(('<input type="text" style="height:100px; display : inline;" class="form-control md-form" />'))
+	itemdescfield = $('<textarea style="display : inline;" rows="2" class="form-control md-form" />')
 	itemdescfield.attr("id", itemid + "_description")
 	itemdescfield.val(itemdescriptionnode.text())
 
@@ -20,7 +22,7 @@ function itemeditor(elem) {
 	itemnamenode.replaceWith(itemnamefield)
 	itemdescriptionnode.replaceWith(itemdescfield)
 
-	self.html("UPDATE");
+	self.html("CONFIRM");
 	self.removeAttr("onclick");
 	self.attr("onclick", "updateitem(self)");
 }
@@ -51,7 +53,7 @@ function deleteitem(elem){
 	self = $(elem);
 
 	console.log(self)
-	self.html("CONFIRM?")
+	self.html("ARE YOU SURE?")
 	self.removeAttr("onclick");
 	self.attr("onclick", "deleteitemfr(self)");
 }
