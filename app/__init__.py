@@ -91,7 +91,7 @@ def characters():
 	users = db.UserInfo.objects(username=session["user"])
 	user = users[0]
 	c = int(random.random() * 100000000000000)
-	newc = db.Character(name = inputs["name"], ptype=inputs["class"], charid=c).save()
+	newc = db.Character(name = inputs["name"], ptype=inputs["class"], charid=c, description=inputs["description"]).save()
 	user.allcharacters.append(newc)
 	user.save()
 	return redirect(url_for("characters"))
@@ -105,9 +105,17 @@ def viewcharacter(charid):
 		return render_template("singlechar.html", char = char)
 	
 	inputs = request.form.to_dict()
+	# print(inputs)
 	char = db.Character.objects(charid=charid)[0]
 	itemid = int(random.random() * 100000000000000000)
-	newi = db.Item(name=inputs["name"], description=inputs["description"], itemid = itemid)
+	tagso = []
+	for x in inputs.keys():
+		if "tag" in x:
+			tagso.append(x[4:])
+
+	print(tagso)
+
+	newi = db.Item(name=inputs["name"], description=inputs["description"], itemid = itemid, tags = tagso)
 	char.inventory.append(newi)
 	char.save()
 	return redirect(url_for("viewcharacter", charid = charid))
