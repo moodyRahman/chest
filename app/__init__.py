@@ -124,6 +124,18 @@ def viewcharacter(charid):
 	char.save()
 	return redirect(url_for("viewcharacter", charid = charid))
 
+@app.route("/characters/<int:charid>/update", methods=["POST"])
+@dec.login_required
+# @dec.charownershipcheck
+def updatechar(charid):
+	inputs = request.form.to_dict()
+	char = db.Character.objects(charid=charid)[0]
+	char.name = inputs["name"]
+	char.ptype = inputs["class"]
+	char.description = inputs["description"]
+	char.save()
+	return redirect(url_for("viewcharacter", charid = charid))
+	pass
 
 @app.route("/characters/update", methods=["POST"])
 @dec.login_required
