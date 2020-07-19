@@ -101,7 +101,7 @@ def characters():
 	return redirect(url_for("characters"))
 
 
-@app.route("/characters/view/<int:charid>", methods=["GET", "POST"])
+@app.route("/characters/<int:charid>/view", methods=["GET", "POST"])
 @dec.login_required
 def viewcharacter(charid):
 	if request.method == "GET":
@@ -116,9 +116,6 @@ def viewcharacter(charid):
 	for x in inputs.keys():
 		if "tag" in x:
 			tagso.append(x[4:])
-
-	print(tagso)
-
 	newi = db.Item(name=inputs["name"], description=inputs["description"], itemid = itemid, tags = tagso)
 	char.inventory.append(newi)
 	char.save()
