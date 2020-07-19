@@ -21,21 +21,26 @@
 
 
 
-<table class="table table-hover header-fixed">
+<table class="table table-hover">
 	<thead>
 		<th scope="col" class="text-primary">Name</th>
 		<th scope="col" class="text-primary">Description</th>
 	</thead>
 
-	<tbody class="text-secondary">
+	<tbody class="text-secondary" style="width:100%">
 		{% for item in char.inventory %}
 
-		<tr>
-			<td style="display:none">{{item.itemid}}</td>
-			<td>{{item.name}}</td>
-			<td>{{item.description}}</td>
-			<td class="text-right" contenteditable="false"><button class="btn btn-outline-info"
-					onclick="itemeditor(this)">edit</button></td>
+		<tr id="{{item.itemid}}_row">
+			<td style="width:25%">
+				<div id="{{item.itemid}}_name">{{item.name}}</div>
+			</td>
+
+			<td style="width:50%">
+				<div id="{{item.itemid}}_description">{{item.description}}</div>
+			</td>
+			<td style="width:25%">
+				<button id="{{item.itemid}}" class="btn btn-outline-info float-right" onclick="itemeditor(this)">edit</button>
+			</td>
 		</tr>
 		{% endfor %}
 
