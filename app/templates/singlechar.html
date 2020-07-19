@@ -35,13 +35,13 @@
 				<div id="{{item.itemid}}_name">{{item.name}}</div>
 			</td>
 
-			<td style="width:55%">
+			<td style="width:59%">
 				<div id="{{item.itemid}}_description">{{item.description}}</div>
 			</td>
-			<td style="width:15%">
+			<td style="width:13%">
 				<button id="{{item.itemid}}" class="btn btn-outline-info float-right" onclick="itemeditor(this)">edit</button>
 			</td>
-			<td style="width:15%">
+			<td style="width:13%">
 				<button id="{{item.itemid}}" class="btn btn-danger float-right" onclick="deleteitem(this)">delete</button>
 			</td>
 		</tr>
@@ -71,7 +71,8 @@
 
 <script>
 	charid = {{ char.charid | safe }};
-	url = "{{url_for('updateitem') | safe}}";
+	updateurl = "{{url_for('updateitem') | safe}}";
+	deleteurl = "{{url_for('deleteitem') | safe}}"
 </script>
 
 <script src="/static/itemupdate.js"></script>
