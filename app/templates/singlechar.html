@@ -8,17 +8,19 @@
 
 <div class="jumbotron">
 
-	<h2>{{char.name}}</h2>
+	<h2 id="charname">{{char.name}}</h2>
 
 
 
-	<h4 class="text-muted">{{char.ptype}}</h4>
+	<h4 id="charclass" class="text-muted">{{char.ptype}}</h4>
 
 	<blockquote class="blockquote">
-		<p class="mb-0">{{char.description}}</p>
-		<footer class="blockquote-footer"><cite title="Source Title">{{d | random}}</cite></footer>
+		<p id="chardesc" class="mb-0">{{char.description}}</p>
+		<footer class="blockquote-footer"><cite title="Source Title">{{eggs | random}}</cite></footer>
 	</blockquote>
-	<button class="btn btn-outline-info" style="vertical-align: right;">update</button>
+	<div>
+		<button class="btn btn-outline-info" style="vertical-align: right;" onclick="charupdate(this)">update</button>
+	</div>
 
 </div>
 
@@ -43,19 +45,21 @@
 
 			<td style="width:70%">
 				<table class="table table-hover">
-					<tr>
+					<tr>	{% if item.description %}
 						<td style="height:75%">
 							<div id="{{item.itemid}}_description">{{item.description}}</div>
 						</td>
+						{% endif %}
+
 					</tr>
 					<tr>
 						<td style="text-align: right;">
 							{% if item.tags%}
-							tagged under | 
-								{%for tag in item.tags%}
-									{{tag}}, 
-								{% endfor %}
+							{%for tag in item.tags%}
+							<span class="badge badge-pill badge-dark" style="background-color:{{tagdict[tag]}};">{{tag}}</span>
+							{% endfor %}
 							{% else %}
+							<span class="badge badge-pill badge-light">no tags</span>
 							{% endif %}
 						</td>
 					</tr>
@@ -64,11 +68,13 @@
 
 			</td>
 			<td style="width:10%">
-				<button type="button" class="btn btn-outlint-info btn-sm" data-container="body"
+				<button type="button" class="btn btn-outline-secondary btn-sm" data-container="body"
 					data-toggle="popover" data-placement="right" data-html="true" data-content="
-					<button class='btn btn-outline-warning btn-sm' id='{{item.itemid}}' onclick='itemeditor(this)'>update</button> 
-					<br><br> 
-					<button class='btn btn-outline-danger btn-sm' id='{{item.itemid}}' onclick='deleteitem(this)'>delete</button>">
+					<button class='btn btn-outline-success btn-sm btn-block' id='{{item.itemid}}' onclick='itemeditor(this)'>update</button> 
+					<br><br>
+					<button class='btn btn-outline-info btn-sm btn-block' id='{{item.itemid}}' onclick='copy(this)'>copy</button>
+					<br><br>
+					<button class='btn btn-outline-danger btn-sm btn-block' id='{{item.itemid}}' onclick='deleteitem(this)'>delete</button>">
 					Options
 				</button>
 			</td>
@@ -96,8 +102,8 @@
 
 	<h4>Add Item</h4>
 	<form action="{{url_for('viewcharacter', charid=char.charid)}}" method="post" autocomplete="off">
-		<input type="text" name="name" class="form-control" placeholder="Item name">
-		<input type="text" name="description" class="form-control" placeholder="Description">
+		<input type="text" name="name" class="form-control" placeholder="new item name">
+		<input type="text" name="description" class="form-control" placeholder="new item description">
 		<br>
 		<u>TAGS</u>
 		<br><br>
@@ -233,6 +239,7 @@
 	charid = {{ char.charid | safe }};
 	updateurl = "{{url_for('updateitem') | safe}}";
 	deleteurl = "{{url_for('deleteitem') | safe}}"
+	charupdateurl = "{{url_for('updatechar', charid=char.charid) | safe}}"
 </script>
 
 <script src="/static/itemupdate.js"></script>
