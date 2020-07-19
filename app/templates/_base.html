@@ -24,9 +24,15 @@
 </head>
 
 <body>
-	{% set d = ["The OmNomNomNomicon", "Eragon: The Movie", "Wait, This Isn't Narnia", "Star Far the War Bar", "The Player's Handbook", "Xanathar Says Hello!"]
-	
+	{% set eggs = ["The OmNomNomNomicon", "Eragon: The Movie", "Wait, This Isn't Narnia", 
+	"Star Far the War Bar", "The Player's Handbook", "Xanathar Says Hello!", "The Lusty Argonian Maid", 
+	"The Sixteen Accords to Madness", "Dwemer, History and Culture"]
 	%}
+
+	{% set tagdict = {"consumable":"coral", "food":"coral", "potion":"coral", "ingredient":"coral", "weapon":"darkcyan",
+	"shortrangedweapon":"darkcyan", "longrangedweapon":"darkcyan", "magicalweapon":"darkcyan", "armor":"firebrick",
+	"clothing":"firebrick", "book/scroll":"darkorchid", "spellbook":"darkorchid", "valuable":"darkorchid",
+	"misc":"darkorchid", "magical":"slategrey", "mundane":"slategrey", "currency":"gold"} %}
 
 	{# navbar #}
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -82,7 +88,7 @@
 			</button>
 		</div>
 		<br>
-		
+
 		{% endfor %}
 		{% endif %}
 		{% endwith %}
@@ -92,14 +98,16 @@
 		<div>
 			PLEASE NOTE THAT THIS APP IS STILL UNDER DEVELOPMENT <br>
 			REPORT ALL BUGS TO THE AUTHOR <br>
-			IG | <a class="text-info" href="https://www.instagram.com/staticvariablecannot/">@STATICVARIABLECANNOT</a> <br>
+			IG | <a class="text-info"
+				href="https://www.instagram.com/staticvariablecannot/">@STATICVARIABLECANNOT</a> <br>
 			EMAIL | MOUDUDUR921@GMAIL.COM <br>
-			GITHUB | <a class="text-info" href="https://github.com/moodyRahman/chest/"> The Chest Git Repo</a> <br>
+			GITHUB | <a class="text-info" href="https://github.com/moodyRahman/chest/"> The Chest Git
+				Repo</a> <br>
 			<br>
 			<br>
 			<br>
-			
-			
+
+
 		</div>
 
 		{% block body %}
