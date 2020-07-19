@@ -114,6 +114,7 @@ def viewcharacter(charid):
 
 
 @app.route("/characters/update", methods=["POST"])
+@dec.login_required
 def updateitem():
 	inputs = request.form.to_dict()
 	char = db.Character.objects(charid = inputs["charid"])[0]
@@ -125,6 +126,19 @@ def updateitem():
 	return redirect(url_for("viewcharacter", charid = inputs["charid"]))
 	pass
 
+@app.route("/characters/delete", methods=["POST"])
+@dec.login_required
+def deleteitem():
+	inputs = request.form.to_dict()
+	char = db.Character.objects(charid=inputs["charid"])[0]
+	for x in char.inventory:
+		if x.itemid == int(inputs["itemid"]):
+			print("here")
+			char.inventory.remove(x)
+			# x.delete()
+			char.save()
+	return redirect(url_for("viewcharacter", charid=inputs["charid"]))
+	pass
 @app.route("/campaigns", methods=["GET", "POST"])
 @dec.login_required
 def campaign():
