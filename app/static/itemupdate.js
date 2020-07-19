@@ -70,7 +70,8 @@ function deleteitemfr(elem){
 		"itemid": itemid,
 		"charid": charid,
 		"itemname": itemname,
-		"description": description
+		"description": description,
+		charid:charid
 	};
 
 	console.log(data)
@@ -115,7 +116,8 @@ function charupdatefr(elem){
 	data={
 		name:charnamenode.val(), 
 		class:charclassnode.val(),
-		description:chardescnode.val()
+		description:chardescnode.val(),
+		charid:charid
 	}
 
 	console.log(data)
