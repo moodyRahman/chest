@@ -58,7 +58,6 @@ def logout():
 @app.route("/register", methods=['GET', 'POST'])
 def register():
 	if request.method == "POST":
-		print(request.form)
 		inputs = request.form.to_dict()
 		username = inputs["username"]
 		pw0 = inputs["password0"]
@@ -73,7 +72,6 @@ def register():
 		if users:
 			flash("username already exists", "warning")
 			return redirect(url_for("register"))
-		print(users)
 		salt = urandom(64).hex()
 		
 		hashedpassword = hashlib.sha512(
@@ -95,7 +93,6 @@ def characters():
 	c = int(random.random() * 100000000000000)
 	newc = db.Character(name = inputs["name"], ptype=inputs["class"], charid=c).save()
 	user.allcharacters.append(newc)
-	print(user.username)
 	user.save()
 	return redirect(url_for("characters"))
 
@@ -113,8 +110,6 @@ def viewcharacter(charid):
 	newi = db.Item(name=inputs["name"], description=inputs["description"], itemid = itemid)
 	char.inventory.append(newi)
 	char.save()
-	print("============")
-	print(charid)
 	return redirect(url_for("viewcharacter", charid = charid))
 
 
@@ -123,13 +118,10 @@ def updateitem():
 	inputs = request.form.to_dict()
 	char = db.Character.objects(charid = inputs["charid"])[0]
 	for x in char.inventory:
-		print(x.itemid)
 		if x.itemid == int(inputs["itemid"]):
-			print("here")
 			x.name = inputs["itemname"]
 			x.description = inputs["description"]
 			char.save()
-	print(inputs)
 	return redirect(url_for("viewcharacter", charid = inputs["charid"]))
 	pass
 
