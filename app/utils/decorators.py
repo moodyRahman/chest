@@ -40,7 +40,7 @@ def charownershipcheck(route):
 				print("THE USER IS VERIFIED")
 				return route(*args, **kwargs)
 			else:
-				flash("you're not verified fool")
+				flash("you're not verified fool", "warning")
 				return redirect(url_for("login"))
 		else:
 			return route(*args, **kwargs)
