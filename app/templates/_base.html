@@ -24,6 +24,9 @@
 </head>
 
 <body>
+	{% set d = ["The OmNomNomNomicon", "Eragon: The Movie", "Wait, This Isn't Narnia", "Star Far the War Bar", "The Player's Handbook", "Xanathar Says Hello!"]
+	
+	%}
 
 	{# navbar #}
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -103,6 +106,10 @@
 		{% endblock body %}
 
 	</div>
+
+	<script>
+		$("[data-toggle=popover]").popover();
+	</script>
 </body>
 
 </html>
