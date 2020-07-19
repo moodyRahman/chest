@@ -88,6 +88,10 @@ def characters():
 		allchars = db.UserInfo.objects(username=session["user"])[0].allcharacters
 		return render_template("characters.html", characters=allchars)
 	inputs = request.form.to_dict()
+	print(inputs)
+	if inputs["name"].isspace() or inputs["class"].isspace() or (len(inputs["class"]) == 0) or (len(inputs["name"]) == 0):
+		flash("characters must have a name and a class", "warning")
+		return redirect(url_for("characters"))
 	users = db.UserInfo.objects(username=session["user"])
 	user = users[0]
 	c = int(random.random() * 100000000000000)
