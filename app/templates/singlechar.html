@@ -35,10 +35,38 @@
 				<div id="{{item.itemid}}_name">{{item.name}}</div>
 			</td>
 
-			<td style="width:59%">
-				<div id="{{item.itemid}}_description">{{item.description}}</div>
+			<td style="width:70%">
+				<table class="table table-hover">
+					<tr>
+						<td style="height:75%">
+							<div id="{{item.itemid}}_description">{{item.description}}</div>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right;">
+							{% if item.tags%}
+							tagged under | 
+								{%for tag in item.tags%}
+									{{tag}}, 
+								{% endfor %}
+							{% else %}
+							{% endif %}
+						</td>
+					</tr>
+
+				</table>
+
 			</td>
-			<td style="width:13%">
+			<td style="width:10%">
+				<button type="button" class="btn btn-outlint-info btn-sm" data-container="body"
+					data-toggle="popover" data-placement="right" data-html="true" data-content="
+					<button class='btn btn-outline-warning btn-sm' id='{{item.itemid}}' onclick='itemeditor(this)'>update</button> 
+					<br><br> 
+					<button class='btn btn-outline-danger btn-sm' id='{{item.itemid}}' onclick='deleteitem(this)'>delete</button>">
+					Options
+				</button>
+			</td>
+			<!-- <td style="width:5%">
 				<button id="{{item.itemid}}" class="btn btn-outline-info float-right" onclick="itemeditor(this)">edit</button>
 			</td>
 			<td style="width:13%">
