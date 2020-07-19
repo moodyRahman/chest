@@ -14,7 +14,7 @@ class Item(mg.EmbeddedDocument):
 	count = mg.IntField()
 	description = mg.StringField()
 	weight = mg.FloatField()
-	tags = mg.ListField(mg.StringField)
+	tags = mg.ListField(tag = mg.StringField)
 	equipped = mg.BooleanField()
 	itemid = mg.IntField()
 
@@ -22,7 +22,7 @@ class Item(mg.EmbeddedDocument):
 class Character(mg.Document):
 	name = mg.StringField()
 	ptype = mg.StringField() # class
-	# inventory = mg.ListField(mg.StringField())
+	description = mg.StringField()
 	inventory = mg.EmbeddedDocumentListField(Item)
 	charid = mg.IntField()
 	pass
