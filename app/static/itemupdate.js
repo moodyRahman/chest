@@ -1,10 +1,25 @@
 function itemeditor(elem) {
 	self = $(elem);
+	itemid = self.attr("id");
+	itemnamenode = $("#" + itemid + "_name")
+	itemdescriptionnode = $("#" + itemid + "_description")
 
-	row = self.parent().parent();
-	row.attr("contenteditable", "true")
-	row.removeClass('text-secondary');
-	row.addClass("text-success");
+	console.log(itemid)
+	console.log(itemnamenode.text())
+	console.log(itemdescriptionnode.text())
+
+	itemnamefield = $('<input type="text" style="display : inline;" class="form-control md-form" />')
+	itemnamefield.val(itemnamenode.text())
+	itemnamefield.attr("id", itemid + "_name")
+
+	itemdescfield = $(('<input type="text" style="display : inline;" class="form-control md-form" />'))
+	itemdescfield.attr("id", itemid + "_description")
+	itemdescfield.val(itemdescriptionnode.text())
+
+
+	itemnamenode.replaceWith(itemnamefield)
+	itemdescriptionnode.replaceWith(itemdescfield)
+
 	self.html("UPDATE");
 	self.removeAttr("onclick");
 	self.attr("onclick", "updateitem(self)");
@@ -14,13 +29,11 @@ function itemeditor(elem) {
 
 function updateitem(elem) {
 	self = $(elem);
-	row = self.parent().parent();
-	// print(row)
-	console.log(row)
-	kids = row.children();
-	itemid = parseInt(kids[0].innerHTML);
-	itemname = kids[1].innerHTML;
-	description = kids[2].innerHTML;
+	itemid = self.attr("id");
+	itemnamenode = $("#" + itemid + "_name")
+	itemdescriptionnode = $("#" + itemid + "_description")
+	itemname = itemnamenode.val()
+	description = itemdescriptionnode.val()
 	data = {
 		"itemid":itemid, 
 		"charid":charid,
@@ -30,6 +43,7 @@ function updateitem(elem) {
 	console.log(url);
 	// data = JSON.stringify(data)
 	console.log(data);
+	console.log(itemnamenode)
 	post(url, data);
 }
 
