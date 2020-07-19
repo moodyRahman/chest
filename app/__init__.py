@@ -103,6 +103,7 @@ def characters():
 
 @app.route("/characters/<int:charid>/view", methods=["GET", "POST"])
 @dec.login_required
+@dec.charownershipcheck
 def viewcharacter(charid):
 	if request.method == "GET":
 		char = db.Character.objects(charid = charid)[0]
@@ -123,7 +124,7 @@ def viewcharacter(charid):
 
 @app.route("/characters/<int:charid>/update", methods=["POST"])
 @dec.login_required
-# @dec.charownershipcheck
+@dec.charownershipcheck
 def updatechar(charid):
 	inputs = request.form.to_dict()
 	char = db.Character.objects(charid=charid)[0]
@@ -136,6 +137,7 @@ def updatechar(charid):
 
 @app.route("/characters/update", methods=["POST"])
 @dec.login_required
+@dec.charownershipcheck
 def updateitem():
 	inputs = request.form.to_dict()
 	char = db.Character.objects(charid = inputs["charid"])[0]
@@ -149,6 +151,7 @@ def updateitem():
 
 @app.route("/characters/delete", methods=["POST"])
 @dec.login_required
+@dec.charownershipcheck
 def deleteitem():
 	inputs = request.form.to_dict()
 	char = db.Character.objects(charid=inputs["charid"])[0]
@@ -160,6 +163,7 @@ def deleteitem():
 			char.save()
 	return redirect(url_for("viewcharacter", charid=inputs["charid"]))
 	pass
+
 @app.route("/campaigns", methods=["GET", "POST"])
 @dec.login_required
 def campaign():
