@@ -1,4 +1,4 @@
-from flask import session, redirect, url_for
+from flask import session, redirect, url_for, request, flash
 from functools import wraps
 import app.utils.dbctrl as db
 
@@ -32,7 +32,17 @@ def force_logout(route):
 def charownershipcheck(route):
 	@wraps(route)
 	def wrapper(*args, **kwargs):
-		print(charid)
-		return route(*args, **kwargs)
+		if request.method == "POST":
+			inputs = request.form.to_dict()
+			user = db.UserInfo.objects(username = session["user"])[0]
+			inputcharid = int(inputs["charid"])
+			if inputcharid in [x.charid for x in user.allcharacters]:
+				print("THE USER IS VERIFIED")
+				return route(*args, **kwargs)
+			else:
+				flash("you're not verified fool")
+				return redirect(url_for("login"))
+		else:
+			return route(*args, **kwargs)
 	
 	return wrapper
