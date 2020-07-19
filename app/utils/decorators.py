@@ -28,3 +28,11 @@ def force_logout(route):
 		return route(*args, **kwargs)
 
 	return wrapper
+
+def charownershipcheck(route):
+	@wraps(route)
+	def wrapper(*args, **kwargs):
+		print(charid)
+		return route(*args, **kwargs)
+	
+	return wrapper
