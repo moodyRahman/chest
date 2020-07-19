@@ -31,15 +31,18 @@
 		{% for item in char.inventory %}
 
 		<tr id="{{item.itemid}}_row">
-			<td style="width:25%">
+			<td style="width:15%">
 				<div id="{{item.itemid}}_name">{{item.name}}</div>
 			</td>
 
-			<td style="width:50%">
+			<td style="width:55%">
 				<div id="{{item.itemid}}_description">{{item.description}}</div>
 			</td>
-			<td style="width:25%">
+			<td style="width:15%">
 				<button id="{{item.itemid}}" class="btn btn-outline-info float-right" onclick="itemeditor(this)">edit</button>
+			</td>
+			<td style="width:15%">
+				<button id="{{item.itemid}}" class="btn btn-danger float-right" onclick="deleteitem(this)">delete</button>
 			</td>
 		</tr>
 		{% endfor %}
