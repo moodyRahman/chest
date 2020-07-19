@@ -7,14 +7,14 @@
 {% if characters %}
 CHARACTERS
 {% for char in characters %}
-<a href="{{url_for('viewcharacter', charid=char.charid)}}">
-	<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+<div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+	<a href="{{url_for('viewcharacter', charid=char.charid)}}" style="color: white;">
 		<div class="card-body">
 			<h4 class="card-title">{{char.name}}</h4>
 			<p class="card-text">{{char.ptype}}</p>
 		</div>
+	</a>
 	</div>
-</a>
 {% endfor %}
 {% endif %}
 
@@ -22,6 +22,7 @@ CHARACTERS
 <form action="{{url_for('characters')}}" method="post" autocomplete="off">
 	Name: <input type="text" name="name" class="form-control">
 	Class: <input type="text" name="class" class="form-control">
+	Description: <input type="text" name="description" class="form-control" style="height:80px;">
 	<input type="submit" value="upload" class="btn btn-outline-primary">
 </form>
 
