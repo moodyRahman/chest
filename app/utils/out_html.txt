@@ -1,0 +1,92 @@
+<tr>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-consumable" name="tag-consumable">
+		<label class="" for="tag-weapon">consumable</label>
+	</td>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-food" name="tag-food">
+		<label class="" for="tag-weapon">food</label>
+	</td>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-potion" name="tag-potion">
+		<label class="" for="tag-weapon">potion</label>
+	</td>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-ingredient" name="tag-ingredient">
+		<label class="" for="tag-weapon">ingredient</label>
+	</td>
+</tr>
+<tr>	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-weapon" name="tag-weapon">
+		<label class="" for="tag-weapon">weapon</label>
+	</td>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-shortrangedweapon" name="tag-shortrangedweapon">
+		<label class="" for="tag-weapon">shortrangedweapon</label>
+	</td>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-longrangedweapon" name="tag-longrangedweapon">
+		<label class="" for="tag-weapon">longrangedweapon</label>
+	</td>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-magicalweapon" name="tag-magicalweapon">
+		<label class="" for="tag-weapon">magicalweapon</label>
+	</td>
+</tr>
+<tr>	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-armor" name="tag-armor">
+		<label class="" for="tag-weapon">armor</label>
+	</td>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-clothing" name="tag-clothing">
+		<label class="" for="tag-weapon">clothing</label>
+	</td>
+</tr>
+<tr>	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-book/scroll" name="tag-book/scroll">
+		<label class="" for="tag-weapon">book/scroll</label>
+	</td>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-spellbook" name="tag-spellbook">
+		<label class="" for="tag-weapon">spellbook</label>
+	</td>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-valuable" name="tag-valuable">
+		<label class="" for="tag-weapon">valuable</label>
+	</td>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-misc" name="tag-misc">
+		<label class="" for="tag-weapon">misc</label>
+	</td>
+</tr>
+<tr>	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-magical" name="tag-magical">
+		<label class="" for="tag-weapon">magical</label>
+	</td>
+	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-mundane" name="tag-mundane">
+		<label class="" for="tag-weapon">mundane</label>
+	</td>
+</tr>
+<tr>	<td>
+
+		<input type ="checkbox" class="form-check-input" id="tag-currency" name="tag-currency">
+		<label class="" for="tag-weapon">currency</label>
+	</td>
+</tr>
