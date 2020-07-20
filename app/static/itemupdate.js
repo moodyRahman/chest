@@ -56,7 +56,10 @@ function updateitem(elem) {
 		"itemname":itemname, 
 		"description":description 
 	};
-	console.log(data);
-	console.log(itemnamenode)
-	post(updateurl, data);
+
+
+	console.log(data)
+
+
+	// post(updateurl, data);
 }
