@@ -22,7 +22,11 @@ function charupdate(elem) {
 	charclassnode.replaceWith(charclassfield)
 	chardescnode.replaceWith(chardescfield)
 
-	self.html("CONFIRM");
+	// chardeletebutton = $('<button class="btn btn-danger" style="float: right;" onclick="chardelete(this)" data-toggle="modal" data-target="#chardeletemodal">DELETE THIS CHARACTER</button>')
+	chardeletebutton = $('<button type="button" class="btn btn-danger" style="float: right;" data-toggle="modal" data-target="#exampleModal">DELETE CHARACTER</button >')
+	chardeletebutton.insertAfter(self)
+	// self.insertAfter(chardeletebutton)
+	self.html("CONFIRM EDIT");
 	self.removeAttr("onclick");
 	self.attr("onclick", "charupdatefr(self)");
 }
