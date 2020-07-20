@@ -66,11 +66,11 @@
 
 			</td>
 			<td style="width:10%">
-				<button type="button" class="btn btn-outline-secondary btn-sm" data-container="body"
+				<button type="button" class="btn btn-outline-secondary btn-sm pop" data-container="body"
 					data-toggle="popover" data-placement="right" data-html="true" data-content="
 					<button class='btn btn-outline-success btn-sm btn-block' id='{{item.itemid}}' onclick='itemeditor(this)'>update</button> 
 					<br><br>
-					<button class='btn btn-outline-info btn-sm btn-block' id='{{item.itemid}}' onclick='copy(this)'>copy</button>
+					<button data-toggle='modal' data-target='#copyconfirm' class='btn btn-outline-info btn-sm btn-block' id='{{item.itemid}}' onclick='copyitem(this)'>copy</button>
 					<br><br>
 					<button class='btn btn-outline-danger btn-sm btn-block' id='{{item.itemid}}' onclick='deleteitem(this)'>delete</button>">
 					Options
@@ -100,8 +100,8 @@
 
 	<h4>Add Item</h4>
 	<form action="{{url_for('viewcharacter', charid=char.charid)}}" method="post" autocomplete="off">
-		<input type="text" name="name" class="form-control" placeholder="new item name">
-		<input type="text" name="description" class="form-control" placeholder="new item description">
+		<input type="text" id="newname" name="name" class="form-control" placeholder="new item name">
+		<input type="text" id="newdesc" name="description" class="form-control" placeholder="new item description">
 		<br>
 		<u>TAGS</u>
 		<br><br>
@@ -244,11 +244,30 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				...
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">No, take me back</button>
 				<button type="button" class="btn btn-primary" onclick="chardelete(this)">Yes, delete this character</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="copyconfirm" tabindex="-1" role="dialog" aria-labelledby="chardeletemodal"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="chardeletemodal"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<h6>Item data copied into the New Item at the bottom of the page</h6>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Okay, got it</button>
 			</div>
 		</div>
 	</div>
@@ -262,10 +281,33 @@
 	chardeleteurl = "{{url_for('deletechar', charid=char.charid) | safe}}"
 </script>
 
+<script>
+	$('.pop').popover({
+			trigger: 'manual',
+			html: true,
+			animation: false
+		})
+			.on('mouseenter', function () {
+				var _this = this;
+				$(this).popover('show');
+				$('.popover').on('mouseleave', function () {
+					$(_this).popover('hide');
+				});
+			}).on('mouseleave', function () {
+				var _this = this;
+				setTimeout(function () {
+					if (!$('.popover:hover').length) {
+						$(_this).popover('hide');
+					}
+				}, 300);
+			});
+</script>
+
 <script src="/static/charupdate.js"></script>
 <script src="/static/chardelete.js"></script>
 <script src="/static/itemupdate.js"></script>
 <script src="/static/itemdelete.js"></script>
+<script src="/static/itemcopy.js"></script>
 <script src="/static/post.js"></script>
 
 {% endblock body %}
