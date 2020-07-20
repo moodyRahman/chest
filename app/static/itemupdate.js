@@ -4,10 +4,6 @@ function itemeditor(elem) {
 	itemnamenode = $("#" + itemid + "_name")
 	itemdescriptionnode = $("#" + itemid + "_description")
 
-	console.log(itemid)
-	console.log(itemnamenode.text())
-	console.log(itemdescriptionnode.text())
-
 	itemnamefield = $('<input type="text" style="height:100%; display : inline;" class="form-control md-form" />')
 	// itemnamefield = $('<textarea style="display : inline;" class="form-control md-form" />')
 	itemnamefield.val(itemnamenode.text())
@@ -18,9 +14,12 @@ function itemeditor(elem) {
 	itemdescfield.attr("id", itemid + "_description")
 	itemdescfield.val(itemdescriptionnode.text())
 
+	console.log(itemnamenode.prop("tagName"))
 
-	itemnamenode.replaceWith(itemnamefield)
-	itemdescriptionnode.replaceWith(itemdescfield)
+	if (itemnamenode.prop("tagName") !== "INPUT"){
+		itemnamenode.replaceWith(itemnamefield)
+		itemdescriptionnode.replaceWith(itemdescfield)
+	}
 
 	self.html("CONFIRM");
 	self.removeAttr("onclick");
