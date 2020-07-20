@@ -81,7 +81,8 @@ def register():
 		return redirect(url_for("index"))
 	return render_template("register.html")
 
-@app.route("/characters/", methods=["GET", "POST"])
+
+@app.route("/characters", methods=["GET", "POST"], strict_slashes=False)
 @dec.login_required
 def characters():
 	if request.method == "GET":
