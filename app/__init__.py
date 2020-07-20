@@ -81,7 +81,7 @@ def register():
 		return redirect(url_for("index"))
 	return render_template("register.html")
 
-@app.route("/characters", methods=["GET", "POST"])
+@app.route("/characters/", methods=["GET", "POST"])
 @dec.login_required
 def characters():
 	if request.method == "GET":
@@ -135,10 +135,10 @@ def updatechar(charid):
 	return redirect(url_for("viewcharacter", charid = charid))
 	pass
 
-@app.route("/characters/update", methods=["POST"])
+@app.route("/characters/<int:charid>/updateitem", methods=["POST"])
 @dec.login_required
 @dec.charownershipcheck
-def updateitem():
+def updateitem(charid):
 	inputs = request.form.to_dict()
 	char = db.Character.objects(charid = inputs["charid"])[0]
 	for x in char.inventory:
@@ -149,10 +149,11 @@ def updateitem():
 	return redirect(url_for("viewcharacter", charid = inputs["charid"]))
 	pass
 
-@app.route("/characters/delete", methods=["POST"])
+
+@app.route("/characters/<int:charid>/deleteitem", methods=["POST"])
 @dec.login_required
 @dec.charownershipcheck
-def deleteitem():
+def deleteitem(charid):
 	inputs = request.form.to_dict()
 	char = db.Character.objects(charid=inputs["charid"])[0]
 	for x in char.inventory:
@@ -162,6 +163,21 @@ def deleteitem():
 			# x.delete()
 			char.save()
 	return redirect(url_for("viewcharacter", charid=inputs["charid"]))
+	pass
+
+@app.route("/characters/<int:charid>/delete", methods=["POST"])
+@dec.charownershipcheck
+def deletechar(charid):
+	inputs = request.form.to_dict()
+	char = db.Character.objects(charid = inputs["charid"])[0].pk
+	db.Character.objects(charid=inputs["charid"])[0].delete()
+
+	user = db.UserInfo.objects(username=session["user"]).update_one(pull__allcharacters=char)
+	print(char)
+		
+	# 	print(x.charid)
+	return redirect(url_for("characters"))
+	# return inputs
 	pass
 
 @app.route("/campaigns", methods=["GET", "POST"])
