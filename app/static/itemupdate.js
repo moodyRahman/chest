@@ -26,7 +26,7 @@ function itemeditor(elem) {
 	self.attr("onclick", "updateitem(self)");
 
 	newpopoverbuttons =`
-					<button class='btn btn-outline-success btn-sm btn-block' id='`+ itemid +`' onclick='updateitem(this)'>update</button> 
+					<button class='btn btn-outline-success btn-sm btn-block' id='`+ itemid +`' onclick='updateitem(this)'>confirm</button> 
 					<br><br>
 					<button data-toggle='modal' data-target='#copyconfirm' class='btn btn-outline-info btn-sm btn-block' id='`+ itemid +`' onclick='copyitem(this)'>copy</button>
 					<br><br>
@@ -49,8 +49,6 @@ function updateitem(elem) {
 	itemname = itemnamenode.val()
 	description = itemdescriptionnode.val()
 
-	console.log(itemname)
-	console.log(description)
 	
 	data = {
 		"itemid":itemid, 
@@ -58,8 +56,7 @@ function updateitem(elem) {
 		"itemname":itemname, 
 		"description":description 
 	};
-	// data = JSON.stringify(data)
-	// console.log(data);
-	// console.log(itemnamenode)
-	// post(updateurl, data);
+	console.log(data);
+	console.log(itemnamenode)
+	post(updateurl, data);
 }
