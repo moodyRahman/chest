@@ -1,7 +1,19 @@
 {% extends "_base.html" %}
+{% from "macros/modal.macro" import modal %}
 {% block title %} {{char.name}} | Chest {% endblock title %}
 
-{% block head %} {% endblock head %}
+{% block head %} 
+<style>
+	input {
+        border-top-style: hidden;
+        border-right-style: hidden;
+        border-left-style: hidden;
+        border-bottom-style: groove;
+        background-color: #eee;
+      }
+</style>
+
+{% endblock head %}
 {% block body %}
 
 
@@ -17,7 +29,7 @@
 		<footer class="blockquote-footer"><cite title="Source Title">{{eggs | random}}</cite></footer>
 	</blockquote>
 	<div>
-		<button class="btn btn-outline-info" style="vertical-align: right;" onclick="charupdate(this)">update</button>
+		<button class="btn btn-outline-info" style="vertical-align: right;" onclick="charupdate(this)">edit character</button>
 	</div>
 
 </div>
@@ -66,7 +78,7 @@
 
 			</td>
 			<td style="width:10%">
-				<button type="button" class="btn btn-outline-secondary btn-sm pop" data-container="body"
+				<button type="button" id="{{item.itemid}}_popover" class="btn btn-outline-secondary btn-sm pop" data-container="body"
 					data-toggle="popover" data-placement="right" data-html="true" data-content="
 					<button class='btn btn-outline-success btn-sm btn-block' id='{{item.itemid}}' onclick='itemeditor(this)'>update</button> 
 					<br><br>
@@ -233,45 +245,10 @@
 
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="chardeletemodal"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="chardeletemodal">Are you sure you want to delete this character?</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">No, take me back</button>
-				<button type="button" class="btn btn-primary" onclick="chardelete(this)">Yes, delete this character</button>
-			</div>
-		</div>
-	</div>
-</div>
+{{modal('deletecharmodal','', 'Are you sure you want to delete this character?', '<button type="button" class="btn btn-secondary" data-dismiss="modal">No, take me back</button>
+<button type="button" class="btn btn-primary" onclick="chardelete(this)">Yes, delete this character</button>')}}
 
-<div class="modal fade" id="copyconfirm" tabindex="-1" role="dialog" aria-labelledby="chardeletemodal"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="chardeletemodal"></h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<h6>Item data copied into the New Item at the bottom of the page</h6>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Okay, got it</button>
-			</div>
-		</div>
-	</div>
-</div>
+{{modal('copyconfirm', '', 'Item data copied into the New Item at the bottom of the page')}}
 
 <script>
 	charid = {{ char.charid | safe }};
@@ -281,27 +258,6 @@
 	chardeleteurl = "{{url_for('deletechar', charid=char.charid) | safe}}"
 </script>
 
-<script>
-	$('.pop').popover({
-			trigger: 'manual',
-			html: true,
-			animation: false
-		})
-			.on('mouseenter', function () {
-				var _this = this;
-				$(this).popover('show');
-				$('.popover').on('mouseleave', function () {
-					$(_this).popover('hide');
-				});
-			}).on('mouseleave', function () {
-				var _this = this;
-				setTimeout(function () {
-					if (!$('.popover:hover').length) {
-						$(_this).popover('hide');
-					}
-				}, 300);
-			});
-</script>
 
 <script src="/static/charupdate.js"></script>
 <script src="/static/chardelete.js"></script>
