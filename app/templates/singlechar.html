@@ -10,8 +10,6 @@
 
 	<h2 id="charname">{{char.name}}</h2>
 
-
-
 	<h4 id="charclass" class="text-muted">{{char.ptype}}</h4>
 
 	<blockquote class="blockquote">
@@ -235,15 +233,38 @@
 
 </div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="chardeletemodal"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="chardeletemodal">Are you sure you want to delete this character?</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				...
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">No, take me back</button>
+				<button type="button" class="btn btn-primary" onclick="chardelete(this)">Yes, delete this character</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
 	charid = {{ char.charid | safe }};
-	updateurl = "{{url_for('updateitem') | safe}}";
-	deleteurl = "{{url_for('deleteitem') | safe}}"
+	updateurl = "{{url_for('updateitem', charid=char.charid) | safe}}";
+	deleteurl = "{{url_for('deleteitem', charid=char.charid) | safe}}"
 	charupdateurl = "{{url_for('updatechar', charid=char.charid) | safe}}"
+	chardeleteurl = "{{url_for('deletechar', charid=char.charid) | safe}}"
 </script>
 
-<script src="/static/itemupdate.js"></script>
 <script src="/static/charupdate.js"></script>
+<script src="/static/chardelete.js"></script>
+<script src="/static/itemupdate.js"></script>
 <script src="/static/itemdelete.js"></script>
 <script src="/static/post.js"></script>
 
