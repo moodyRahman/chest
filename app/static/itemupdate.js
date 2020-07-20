@@ -24,6 +24,14 @@ function itemeditor(elem) {
 	self.html("CONFIRM");
 	self.removeAttr("onclick");
 	self.attr("onclick", "updateitem(self)");
+
+	newpopoverbuttons =`<button class='btn btn-outline-success btn-sm btn-block' id='`+ itemid +` ' onclick='updateitem(this)'>confirm</button> 
+					<br><br>
+					<button data-toggle='modal' data-target='#copyconfirm' class='btn btn-outline-info btn-sm btn-block' id='`+itemid+`' onclick='copyitem(this)'>copy</button>
+					<br><br>
+					<button class='btn btn-outline-danger btn-sm btn-block' id='`+itemid+`' onclick='deleteitem(this)'>delete</button>" `
+	
+	$("#" + itemid + "_popover").attr("data-content", newpopoverbuttons)
 }
 
 
