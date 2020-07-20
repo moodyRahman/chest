@@ -61,5 +61,5 @@ function updateitem(elem) {
 	console.log(data)
 
 
-	// post(updateurl, data);
+	post(updateurl, data);
 }
