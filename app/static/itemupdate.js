@@ -41,8 +41,16 @@ function updateitem(elem) {
 	itemid = self.attr("id");
 	itemnamenode = $("#" + itemid + "_name")
 	itemdescriptionnode = $("#" + itemid + "_description")
+	
+	console.log(itemnamenode)
+	console.log(itemdescriptionnode)
+
 	itemname = itemnamenode.val()
 	description = itemdescriptionnode.val()
+
+	console.log(itemname)
+	console.log(description)
+	
 	data = {
 		"itemid":itemid, 
 		"charid":charid,
@@ -50,27 +58,7 @@ function updateitem(elem) {
 		"description":description 
 	};
 	// data = JSON.stringify(data)
-	console.log(data);
-	console.log(itemnamenode)
-	post(updateurl, data);
-}
-
-function post(path, params, method = 'post') {
-	const form = document.createElement('form');
-	form.method = method;
-	form.action = path;
-
-	for (const key in params) {
-		if (params.hasOwnProperty(key)) {
-			const hiddenField = document.createElement('input');
-			hiddenField.type = 'hidden';
-			hiddenField.name = key;
-			hiddenField.value = params[key];
-
-			form.appendChild(hiddenField);
-		}
-	}
-
-	document.body.appendChild(form);
-	form.submit();
+	// console.log(data);
+	// console.log(itemnamenode)
+	// post(updateurl, data);
 }
