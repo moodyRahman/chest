@@ -1,0 +1,16 @@
+{% macro taggenerate(input) -%}
+
+	{% for row in input %}
+		<tr>
+			{% for e in row %}
+			<td>
+			
+				<input type="checkbox" class="form-check-input" id="tag-{{e}}" name="tag-{{e}}">
+				<label class="" for="tag-{{e}}">{{e}}</label>
+			</td>
+			
+			{% endfor %}
+		</tr>
+
+	{% endfor %}
+{%- endmacro %}
