@@ -38,6 +38,7 @@
 {% if char.inventory %}
 
 
+<input type="text" name="" id="searchbox">
 
 <table class="table table-hover">
 	<thead>
@@ -48,7 +49,7 @@
 	<tbody class="text-secondary" style="width:100%">
 		{% for item in char.inventory %}
 
-		<tr id="{{item.itemid}}_row">
+		<tr class="inventoryrow" id="{{item.itemid}}">
 			<td style="width:20%">
 				<div id="{{item.itemid}}_name">{{item.name}}</div>
 			</td>
@@ -63,7 +64,7 @@
 
 					</tr>
 					<tr>
-						<td style="text-align: right;">
+						<td style="text-align: right;" id="{{item.itemid}}_tags">
 							{% if item.tags%}
 							{%for tag in item.tags%}
 							<span class="badge badge-pill badge-dark" style="background-color:{{tagdict[tag]}};">{{tag}}</span>
@@ -88,12 +89,6 @@
 					Options
 				</button>
 			</td>
-			<!-- <td style="width:5%">
-				<button id="{{item.itemid}}" class="btn btn-outline-info float-right" onclick="itemeditor(this)">edit</button>
-			</td>
-			<td style="width:5%">
-				<button id="{{item.itemid}}" class="btn btn-danger float-right" onclick="deleteitem(this)">delete</button>
-			</td> -->
 		</tr>
 		{% endfor %}
 
@@ -265,5 +260,6 @@
 <script src="/static/itemdelete.js"></script>
 <script src="/static/itemcopy.js"></script>
 <script src="/static/post.js"></script>
+<script src="/static/search.js"></script>
 
 {% endblock body %}
