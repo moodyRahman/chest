@@ -9,21 +9,46 @@
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 		crossorigin="anonymous"> -->
-	<link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.css">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+	<script src="{{url_for('static', filename='js/jquery-3.2.1.slim.min.js')}}"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	<script src="{{url_for('static', filename='js/popper.min.js')}}"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+
+	<style>
+		#loading {
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			position: fixed;
+			display: block;
+			opacity: 0.7;
+			background-color: #fff;
+			z-index: 99;
+			text-align: center;
+		}
+
+		#loading-image {
+			position: absolute;
+			top: 100px;
+			left: 240px;
+			z-index: 100;
+		}
+	</style>
 	{% block head %}
 	{% endblock head %}
 </head>
 
 <body>
+	<div id="loading">
+		<img id="loading-image" src="static/assets/loading.gif" alt="Loading..." />
+	</div>
 
 	{% set eggs = ["The OmNomNomNomicon", "Eragon: The Movie", "Wait, This Isn't Narnia", 
 		"Star Far the War Bar", "The Player's Handbook", "Xanathar Says Hello!", "The Lusty Argonian Maid", 
@@ -35,7 +60,7 @@
 			"weapon":"darkcyan", "shortrangedweapon":"darkcyan", "longrangedweapon":"darkcyan", "magicalweapon":"darkcyan", 
 			"armor":"firebrick", "clothing":"firebrick", 
 			"book/scroll":"darkorchid", "spellbook":"darkorchid", "valuable":"darkorchid", "misc":"darkorchid", 
-			"magical":"black", "mundane":"black", 
+			"magical":"black", "mundane":"black", "enchanted": "black",
 			"currency":"gold",
 			"common":"brown",
 			"uncommon":"#5c4827",
@@ -43,13 +68,13 @@
 			"legendary":"#0c297e",
 			"artifact":"turquoise"
 		} %}
-	
+
 	{% set alltags = 
 			['consumable','food','potion','ingredient'],
-			['weapon','shortrangedweapon','longrangedweapon','magicalweapon'],
+			['weapon','shortrangedweapon','longrangedweapon'],
 			['armor','clothing'],
 			['book/scroll','spellbook','valuable','misc'],
-			['magical','mundane'],
+			['magical','mundane', 'enchanted'],
 			['common', 'uncommon', 'rare', 'legendary', 'artifact'],
 			['currency']
 		%}
@@ -67,6 +92,9 @@
 			{% if not 'user' in session %}
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('help') }}">Help</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="{{ url_for('login') }}">Log In</a>
 				</li>
 				<li class="nav-item">
@@ -76,6 +104,9 @@
 			{% else %}
 			<!-- right elements -->
 			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url_for('help') }}">Help</a>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="{{url_for('characters')}}">My Characters</a>
 				</li>
@@ -115,21 +146,6 @@
 
 		<br><br>
 
-		<div>
-			PLEASE NOTE THAT THIS APP IS STILL UNDER DEVELOPMENT <br>
-			REPORT ALL BUGS TO THE AUTHOR <br>
-			IG | <a class="text-info"
-				href="https://www.instagram.com/staticvariablecannot/">@STATICVARIABLECANNOT</a> <br>
-			EMAIL | MOUDUDUR921@GMAIL.COM <br>
-			GITHUB | <a class="text-info" href="https://github.com/moodyRahman/chest/"> The Chest Git
-				Repo</a> <br>
-			<br>
-			<br>
-			<br>
-
-
-		</div>
-
 		{% block body %}
 		{% endblock body %}
 
@@ -156,6 +172,12 @@
 					}
 				}, 300);
 			});
+	</script>
+
+	<script>
+		$(window).on("load", function () {
+			$('#loading').hide();
+		})
 	</script>
 </body>
 
