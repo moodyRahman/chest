@@ -22,7 +22,7 @@ function isvalidsearch(query, name, description, tags){
 
 $("#searchbox").on("input", function(self){
 	console.clear()
-	query = $("#searchbox").val()
+	query = $("#searchbox").val().toLowerCase()
 	$(".inventoryrow").each(function( index ){
 		if (query === ""){
 			this.style.display = ""
@@ -30,12 +30,12 @@ $("#searchbox").on("input", function(self){
 		}
 		itemid = this.getAttribute("id")
 		
-		name = $("#" + itemid + "_name").text()
-		description = $("#" + itemid + "_description").text()
+		name = $("#" + itemid + "_name").text().toLowerCase()
+		description = $("#" + itemid + "_description").text().toLowerCase()
 		tags = []
 		$("#" + itemid + "_tags").children().each(function(index){
 			// console.log(this.innerHTML)
-			tags.push(this.innerHTML)
+			tags.push(this.innerHTML.toLowerCase())
 		})
 		// console.log(this)
 		// console.log(name)
