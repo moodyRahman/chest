@@ -141,6 +141,13 @@
 	chardeleteurl = "{{url_for('deletechar', charid=char.charid) | safe}}"
 </script>
 
+<script>
+	$(document).ready(function () {
+		var x = window.scrollX, y = window.scrollY;
+		document.getElementById("newname").focus()
+		window.scrollTo(x, y);
+	});
+</script>
 
 <script src="/static/charupdate.js"></script>
 <script src="/static/chardelete.js"></script>
