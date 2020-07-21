@@ -101,9 +101,15 @@
 <div class="jumbotron">
 
 	<h4>Add Item</h4>
+
 	<form action="{{url_for('viewcharacter', charid=char.charid)}}" method="post" autocomplete="off">
-		<input type="text" id="newname" name="name" class="form-control" placeholder="new item name">
-		<input type="text" id="newdesc" name="description" class="form-control" placeholder="new item description">
+		<div>
+			<input type="text" id="newname" name="name" class="form-control form-control-lg"
+				placeholder="new item name">
+			<br>
+			<input type="text" id="newdesc" name="description" class="form-control form-control-lg"
+				placeholder="new item description">
+		</div>
 		<br>
 		<u>TAGS</u>
 		<br><br>
