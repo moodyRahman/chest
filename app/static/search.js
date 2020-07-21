@@ -25,7 +25,7 @@ $("#searchbox").on("input", function(self){
 	query = $("#searchbox").val()
 	$(".inventoryrow").each(function( index ){
 		if (query === ""){
-			this.style.display = "inline"
+			this.style.display = ""
 			return
 		}
 		itemid = this.getAttribute("id")
@@ -42,7 +42,7 @@ $("#searchbox").on("input", function(self){
 		// console.log(description)
 		// console.log(tags)
 		if (isvalidsearch(query, name, description, tags)){
-			this.style.display = "inline"
+			this.style.display = ""
 
 			console.log(this)
 		}
