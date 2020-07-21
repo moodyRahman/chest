@@ -1,12 +1,11 @@
 {% extends "_base.html" %}
-{% from "macros/modal.macro" import modal %}
+{% from "macros/modal.macro.html" import modal %}
+{% from "macros/tag.macro.html" import taggenerate%}
 {% block title %} {{char.name}} | Chest {% endblock title %}
 
-{% block head %} 
-<style>
-</style>
-
+{% block head %}
 {% endblock head %}
+
 {% block body %}
 
 
@@ -19,10 +18,12 @@
 
 	<blockquote class="blockquote">
 		<p id="chardesc" class="mb-0">{{char.description}}</p>
-		<footer class="blockquote-footer"><cite title="Source Title">{{eggs | random}}</cite></footer>
+		<footer class="blockquote-footer"> The Leading Character in <cite
+				title="Source Title">{{eggs | random}}</cite></footer>
 	</blockquote>
 	<div>
-		<button class="btn btn-outline-info" style="vertical-align: right;" onclick="charupdate(this)">edit character</button>
+		<button class="btn btn-outline-info" style="vertical-align: right;" onclick="charupdate(this)">edit
+			character</button>
 	</div>
 
 </div>
@@ -31,7 +32,7 @@
 {% if char.inventory %}
 
 <h4>fuzzy search</h4>
-<input type="text" class="form-control" placeholder="search query here" id="searchbox">
+<input type="text" class="form-control form-control-lg" placeholder="search query here" id="searchbox">
 <br>
 <br>
 
@@ -51,8 +52,8 @@
 
 			<td style="width:70%">
 				<table class="table table-hover">
-					<tr>	
-						
+					<tr>
+
 						<td style="height:75%">
 							<div id="{{item.itemid}}_description">{{item.description}}</div>
 						</td>
@@ -62,7 +63,8 @@
 						<td style="text-align: right;" id="{{item.itemid}}_tags">
 							{% if item.tags%}
 							{%for tag in item.tags%}
-							<span class="badge badge-pill badge-dark" style="background-color:{{tagdict[tag]}};">{{tag}}</span>
+							<span class="badge badge-pill badge-dark"
+								style="background-color:{{tagdict[tag]}};">{{tag}}</span>
 							{% endfor %}
 							{% else %}
 							<span class="badge badge-pill badge-light">no tags</span>
@@ -74,8 +76,10 @@
 
 			</td>
 			<td style="width:10%">
-				<button type="button" id="{{item.itemid}}_popover" class="btn btn-outline-secondary btn-sm pop" data-container="body"
-					data-toggle="popover" data-placement="right" data-html="true" data-content="
+				<button type="button" id="{{item.itemid}}_popover"
+					class="btn btn-outline-secondary btn-sm pop" data-container="body"
+					data-toggle="popover" data-placement="right" data-html="true"
+					data-content="
 					<button class='btn btn-outline-success btn-sm btn-block' id='{{item.itemid}}' onclick='itemeditor(this)'>update</button> 
 					<br><br>
 					<button data-toggle='modal' data-target='#copyconfirm' class='btn btn-outline-info btn-sm btn-block' id='{{item.itemid}}' onclick='copyitem(this)'>copy</button>
