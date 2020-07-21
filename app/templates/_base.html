@@ -24,15 +24,28 @@
 </head>
 
 <body>
+
 	{% set eggs = ["The OmNomNomNomicon", "Eragon: The Movie", "Wait, This Isn't Narnia", 
-	"Star Far the War Bar", "The Player's Handbook", "Xanathar Says Hello!", "The Lusty Argonian Maid", 
-	"The Sixteen Accords to Madness", "Dwemer, History and Culture"]
+		"Star Far the War Bar", "The Player's Handbook", "Xanathar Says Hello!", "The Lusty Argonian Maid", 
+		"The Sixteen Accords to Madness", "Dwemer, History and Culture"]
 	%}
 
-	{% set tagdict = {"consumable":"coral", "food":"coral", "potion":"coral", "ingredient":"coral", "weapon":"darkcyan",
-	"shortrangedweapon":"darkcyan", "longrangedweapon":"darkcyan", "magicalweapon":"darkcyan", "armor":"firebrick",
-	"clothing":"firebrick", "book/scroll":"darkorchid", "spellbook":"darkorchid", "valuable":"darkorchid",
-	"misc":"darkorchid", "magical":"black", "mundane":"black", "currency":"gold"} %}
+	{% set tagdict = 
+			{"consumable":"coral", "food":"coral", "potion":"coral", "ingredient":"coral", 
+			"weapon":"darkcyan", "shortrangedweapon":"darkcyan", "longrangedweapon":"darkcyan", "magicalweapon":"darkcyan", 
+			"armor":"firebrick", "clothing":"firebrick", 
+			"book/scroll":"darkorchid", "spellbook":"darkorchid", "valuable":"darkorchid", "misc":"darkorchid", 
+			"magical":"black", "mundane":"black", 
+			"currency":"gold"} %}
+	
+	{% set alltags = 
+			['consumable','food','potion','ingredient'],
+			['weapon','shortrangedweapon','longrangedweapon','magicalweapon'],
+			['armor','clothing'],
+			['book/scroll','spellbook','valuable','misc'],
+			['magical','mundane'],
+			['currency'] 
+		%}
 
 	{# navbar #}
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
