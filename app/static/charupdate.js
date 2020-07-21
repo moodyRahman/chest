@@ -5,11 +5,11 @@ function charupdate(elem) {
 	charclassnode = $("#charclass")
 	chardescnode = $("#chardesc")
 
-	charnamefield = $('<input id="charname" placeholder="character name here" type="text" style="height:100%; display : inline; line-height: 2em; font-size:2em; color:green" class="form-control md-form" />')
+	charnamefield = $('<input id="charname" placeholder="character name here" type="text" style="height:100%; display : inline; line-height: 2em; font-size:2em; border: 2px solid red; border-radius: 10px;" class="form-control md-form" />')
 	// itemnamefield = $('<textarea style="display : inline;" class="form-control md-form" />')
 	charnamefield.val(charnamenode.text())
 
-	charclassfield = $('<input id="charclass" placeholder="character class here" type="text" style="height:100%; display : inline; line-height: 2em; font-size:2em; color:green" class="form-control md-form" />')
+	charclassfield = $('<input id="charclass" placeholder="character class here" type="text" style="height:100%; display : inline; line-height: 2em; font-size:2em; border: 2px solid red; border-radius: 10px;" class="form-control md-form" />')
 	charclassfield.val(charclassnode.text())
 
 	// itemdescfield = $(('<input type="text" style="height:100px; display : inline;" class="form-control md-form" />'))
