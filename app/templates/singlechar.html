@@ -153,12 +153,13 @@
 	});
 </script>
 
-<script src="/static/charupdate.js"></script>
-<script src="/static/chardelete.js"></script>
-<script src="/static/itemupdate.js"></script>
-<script src="/static/itemdelete.js"></script>
-<script src="/static/itemcopy.js"></script>
-<script src="/static/post.js"></script>
-<script src="/static/search.js"></script>
+<script src="{{url_for('static', filename='js/charupdate.js')}}"></script>
+<script src="{{url_for('static', filename='js/chardelete.js')}}"></script>
+<script src="{{url_for('static', filename='js/itemupdate.js')}}"></script>
+<script src="{{url_for('static', filename='js/itemdelete.js')}}"></script>
+<script src="{{url_for('static', filename='js/itemcopy.js')}}"></script>
+<script src="{{url_for('static', filename='js/post.js')}}"></script>
+<script src="{{url_for('static', filename='js/search.js')}}"></script>
+
 
 {% endblock body %}
