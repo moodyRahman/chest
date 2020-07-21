@@ -36,7 +36,13 @@
 			"armor":"firebrick", "clothing":"firebrick", 
 			"book/scroll":"darkorchid", "spellbook":"darkorchid", "valuable":"darkorchid", "misc":"darkorchid", 
 			"magical":"black", "mundane":"black", 
-			"currency":"gold"} %}
+			"currency":"gold",
+			"common":"brown",
+			"uncommon":"#5c4827",
+			"rare":"#5d9451",
+			"legendary":"#0c297e",
+			"artifact":"turquoise"
+		} %}
 	
 	{% set alltags = 
 			['consumable','food','potion','ingredient'],
@@ -44,7 +50,8 @@
 			['armor','clothing'],
 			['book/scroll','spellbook','valuable','misc'],
 			['magical','mundane'],
-			['currency'] 
+			['common', 'uncommon', 'rare', 'legendary', 'artifact'],
+			['currency']
 		%}
 
 	{# navbar #}
