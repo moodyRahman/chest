@@ -195,6 +195,13 @@ def campaign():
 
 	return render_template("campaigns.html", campaigns = campaign)
 
+
+@app.route("/help", methods=["GET"])
+def help():
+	return render_template("help.html")
+	pass
+
+
 @app.route("/debug")
 def deb():
 
