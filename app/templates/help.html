@@ -1,72 +1,133 @@
 {% extends "_base.html" %}
 {% block title %} Help | Chest {% endblock title %}
 
-{% block head %} {% endblock head %}
+{% block head %}
+
+<style>
+	img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+</style>
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/slick.css')}}"/>
+
+
+{% endblock head %}
 
 {% block body %}
 
-<h2>what is this app?</h2>
-<b>
-	Welcome to Chest! The last Table Top RPG manager you'll ever need! <br>
-</b>
-This app was made in response to the bulky and difficulty of use for other TRPG inventory managers. The often cater towards the official item list, and have poor support for homebrew items. 
+<div class="jumbotron">
 
-This app is a clean and stripped down inventory manager, supporting multiple characters, item tagging, fuzzy searching, and editing existing entries. 
-<br><br>
+	<h2>what is this app?</h2>
+	<b>
+		Welcome to Chest! The last Table Top RPG manager you'll ever need! <br>
+	</b>
+	This app was made in response to the bulky and difficulty of use for other TRPG inventory managers. The often
+	cater
+	towards the official item list, and have poor support for homebrew items.
+
+	This app is a clean and stripped down inventory manager, supporting multiple characters, item tagging, fuzzy
+	searching,
+	and editing existing entries.
+</div>
+
 
 
 <h3>how to use chest?</h3>
-Register for an account
-<img src="{{url_for('static', filename='assets/0login.gif')}}" alt="making a new account" class="img-fluid border rounded-lg">
+<br>
+<div>
+</div>
 <br><br><br><br>
 
-<h2>
-Make a new character
-</h2>
-<img src="{{url_for('static', filename='assets/1newchar.gif')}}" alt="making a new account"
-	class="img-fluid border rounded-lg">
-<br><br><br><br>
-<h2>
-	You can edit and delete your character
-</h2>
-<img src="{{url_for('static', filename='assets/2editdeletechar.gif')}}" alt="making a new account"
-	class="img-fluid border rounded-lg">
-<br><br><br><br>
 
-<h2>
-	Give your character items
-</h2>
+<button class="btn btn-dark" id="prev">PREV</button>
+<button class="btn btn-dark float-right" id="next">NEXT</button>
+<div class="siema" style="height: 500px;">
+	<div>
+		<h2>
+			Register for an account
+		</h2>
+		<img src="{{url_for('static', filename='assets/0login.gif')}}" alt="making a new account"
+			class="img-fluid border rounded-lg">
+	</div>
 
-<img src="{{url_for('static', filename='assets/3newitem.gif')}}" alt="making a new account"
-	class="img-fluid border rounded-lg">
-<br><br><br><br>
 
-<h2>
-	Search through your inventory with the fuzzy search
-</h2>
-<img src="{{url_for('static', filename='assets/4fuzzy.gif')}}" alt="making a new account"
-	class="img-fluid border rounded-lg">
-<br><br><br><br>
 
-<h2>
-	Edit your inventory
-</h2>
-<img src="{{url_for('static', filename='assets/5edititem.gif')}}" alt="making a new account"
-	class="img-fluid border rounded-lg">
-<br><br><br><br>
-<h2>
-	Copy items
-</h2>
-<img src="{{url_for('static', filename='assets/6copyitem.gif')}}" alt="making a new account"
-	class="img-fluid border rounded-lg">
-<br><br><br><br>
-<h2>
-	Delete items
-</h2>
-<img src="{{url_for('static', filename='assets/7deleteitem.gif')}}" alt="making a new account"
-	class="img-fluid border rounded-lg">
-<br><br><br><br>
+	<div>
+		<h2>
+			Make a new character
+		</h2>
+		<img src="{{url_for('static', filename='assets/1newchar.gif')}}" alt="making a new account"
+			class="img-fluid border rounded-lg">
+	</div>
 
-<h4>MORE FEATURES RELATED TO COMBAT AND CAMPAIGN MANAGMENT TO BE ADDED</h4>
+
+	<div>
+		<h2>
+			You can edit and delete your character
+		</h2>
+		<img src="{{url_for('static', filename='assets/2editdeletechar.gif')}}" alt="making a new account"
+			class="img-fluid border rounded-lg">
+	</div>
+
+	<div>
+		<h2>
+			Give your character items
+		</h2>
+
+		<img src="{{url_for('static', filename='assets/3newitem.gif')}}" alt="making a new account"
+			class="img-fluid border rounded-lg">
+	</div>
+
+
+	<div>
+		<h2>
+			Search through your inventory with the fuzzy search
+		</h2>
+		<img src="{{url_for('static', filename='assets/4fuzzy.gif')}}" alt="making a new account"
+			class="img-fluid border rounded-lg">
+	</div>
+
+	<div>
+		<h2>
+			Edit your inventory
+		</h2>
+		<img src="{{url_for('static', filename='assets/5edititem.gif')}}" alt="making a new account"
+			class="img-fluid border rounded-lg">
+	</div>
+
+	<div>
+		<h2>
+			Copy items
+		</h2>
+		<img src="{{url_for('static', filename='assets/6copyitem.gif')}}" alt="making a new account"
+			class="img-fluid border rounded-lg">
+	</div>
+
+
+	<div>
+		<h2>
+			Delete items
+		</h2>
+		<img src="{{url_for('static', filename='assets/7deleteitem.gif')}}" alt="making a new account"
+			class="img-fluid border rounded-lg">
+	</div>
+
+</div>
+
+<script type="text/javascript" src="{{url_for('static', filename='js/slick.min.js')}}"></script>
+
+<script>
+	$(document).ready(function () {
+		$('.siema').slick({
+			autoplay:true, 
+			autoplaySpeed:3000, 
+			arrows:true, 
+			prevArrow:"#prev",
+			nextArrow:"#next"
+		});
+	});
+</script>
 
 {% endblock body %}
