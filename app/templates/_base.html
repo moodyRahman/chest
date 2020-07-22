@@ -46,10 +46,6 @@
 </head>
 
 <body>
-	<div id="loading">
-		<img id="loading-image" src="static/assets/loading.gif" alt="Loading..." />
-	</div>
-
 	{% set eggs = ["The OmNomNomNomicon", "Eragon: The Movie", "Wait, This Isn't Narnia", 
 		"Star Far the War Bar", "The Player's Handbook", "Xanathar Says Hello!", "The Lusty Argonian Maid", 
 		"The Sixteen Accords to Madness", "Dwemer, History and Culture"]
@@ -172,12 +168,6 @@
 					}
 				}, 300);
 			});
-	</script>
-
-	<script>
-		$(window).on("load", function () {
-			$('#loading').hide();
-		})
 	</script>
 </body>
 
