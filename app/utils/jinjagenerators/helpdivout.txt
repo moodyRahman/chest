@@ -1,0 +1,8 @@
+ [{'text':'Register for an account', 'file':'0login.gif'}, 
+ {'text':'Make a new character', 'file':'1newchar.gif'}, 
+ {'text':'Edit and delete your character', 'file':'2editdeletechar.gif'}, 
+ {'text':'Give your character items', 'file':'3newitem.gif'}, 
+ {'text':'Search through your inventory', 'file':'4fuzzy.gif'}, 
+ {'text':'Edit your inventory', 'file':'5edititem.gif'}, 
+ {'text':'Copy items', 'file':'6copyitem.gif'}, 
+ {'text':'Delete items', 'file':'7deleteitem.gif'}]

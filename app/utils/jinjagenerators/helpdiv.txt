@@ -1,0 +1,8 @@
+Register for an account|0login.gif
+Make a new character|1newchar.gif
+Edit and delete your character|2editdeletechar.gif
+Give your character items|3newitem.gif
+Search through your inventory|4fuzzy.gif
+Edit your inventory|5edititem.gif
+Copy items|6copyitem.gif
+Delete items|7deleteitem.gif
