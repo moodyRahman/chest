@@ -1,4 +1,18 @@
 {% extends "_base.html" %}
+{% from "macros/helpdiv.macro.html" import helpdivgen%}
+
+{% set helpin = 
+[
+{'text':'Register for an account', 'file':'0login.gif'},
+{'text':'Make a new character', 'file':'1newchar.gif'},
+{'text':'Edit and delete your character', 'file':'2editdeletechar.gif'},
+{'text':'Give your character items', 'file':'3newitem.gif'},
+{'text':'Search through your inventory', 'file':'4fuzzy.gif'},
+{'text':'Edit your inventory', 'file':'5edititem.gif'},
+{'text':'Copy items', 'file':'6copyitem.gif'},
+{'text':'Delete items', 'file':'7deleteitem.gif'}
+] %}
+
 {% block title %} Help | Chest {% endblock title %}
 
 {% block head %}
@@ -10,7 +24,7 @@
 	}
 </style>
 
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/slick.css')}}"/>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/slick.css')}}" />
 
 
 {% endblock head %}
@@ -44,88 +58,24 @@
 <button class="btn btn-dark" id="prev">PREV</button>
 <button class="btn btn-dark float-right" id="next">NEXT</button>
 <div class="siema" style="height: 500px;">
-	<div>
-		<h2>
-			Register for an account
-		</h2>
-		<img src="{{url_for('static', filename='assets/0login.gif')}}" alt="making a new account"
-			class="img-fluid border rounded-lg">
-	</div>
 
-
-
-	<div>
-		<h2>
-			Make a new character
-		</h2>
-		<img src="{{url_for('static', filename='assets/1newchar.gif')}}" alt="making a new account"
-			class="img-fluid border rounded-lg">
-	</div>
-
-
-	<div>
-		<h2>
-			You can edit and delete your character
-		</h2>
-		<img src="{{url_for('static', filename='assets/2editdeletechar.gif')}}" alt="making a new account"
-			class="img-fluid border rounded-lg">
-	</div>
-
-	<div>
-		<h2>
-			Give your character items
-		</h2>
-
-		<img src="{{url_for('static', filename='assets/3newitem.gif')}}" alt="making a new account"
-			class="img-fluid border rounded-lg">
-	</div>
-
-
-	<div>
-		<h2>
-			Search through your inventory with the fuzzy search
-		</h2>
-		<img src="{{url_for('static', filename='assets/4fuzzy.gif')}}" alt="making a new account"
-			class="img-fluid border rounded-lg">
-	</div>
-
-	<div>
-		<h2>
-			Edit your inventory
-		</h2>
-		<img src="{{url_for('static', filename='assets/5edititem.gif')}}" alt="making a new account"
-			class="img-fluid border rounded-lg">
-	</div>
-
-	<div>
-		<h2>
-			Copy items
-		</h2>
-		<img src="{{url_for('static', filename='assets/6copyitem.gif')}}" alt="making a new account"
-			class="img-fluid border rounded-lg">
-	</div>
-
-
-	<div>
-		<h2>
-			Delete items
-		</h2>
-		<img src="{{url_for('static', filename='assets/7deleteitem.gif')}}" alt="making a new account"
-			class="img-fluid border rounded-lg">
-	</div>
+	{{helpdivgen(helpin)}}
 
 </div>
+
+
+
 
 <script type="text/javascript" src="{{url_for('static', filename='js/slick.min.js')}}"></script>
 
 <script>
 	$(document).ready(function () {
 		$('.siema').slick({
-			autoplay:true, 
-			autoplaySpeed:3000, 
-			arrows:true, 
-			prevArrow:"#prev",
-			nextArrow:"#next"
+			// autoplay:true, 
+			autoplaySpeed: 3000,
+			arrows: true,
+			prevArrow: "#prev",
+			nextArrow: "#next"
 		});
 	});
 </script>
