@@ -1,0 +1,14 @@
+{% macro helpdivgen(inputdict) -%}
+
+{% for in in inputdict %}
+<div>
+	<h2>
+		{{in["text"]}}
+	</h2>
+	<img src="{{url_for('static', filename='assets/' + in['file'])}}" alt="making a new account"
+		class="img-fluid border rounded-lg">
+</div>
+
+{% endfor %}
+
+{%- endmacro %}
