@@ -5,9 +5,18 @@
 {% block body %}
 
 <form action="{{url_for('login')}}" method="post" autocomplete="off">
-	username: <input type="text" name="username" class="form-control">
-	password: <input type="password" name="password" class="form-control">
+	<input type="text" name="username" class="form-control" placeholder="username">
+	<br>
+	<input type="password" name="password" class="form-control" placeholder="password">
 	<br> <br>
-	<input type="submit" value="LOGIN" class="btn">
+	<input type="submit" value="Sign In" class="btn btn-outline-primary">
 </form>
+
+<br>
+<br>
+Don't have an account?
+<br>
+<a href="{{url_for('register')}}">
+	<button class="btn btn-dark"> Register here</button>
+</a>
 {% endblock body %}
