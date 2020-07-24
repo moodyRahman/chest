@@ -147,7 +147,7 @@ def updateitem(charid):
 			x.name = inputs["itemname"]
 			x.description = inputs["description"]
 			char.save()
-	return redirect(url_for("viewcharacter", charid = inputs["charid"]))
+	return redirect(url_for("viewcharacter", charid = charid))
 	pass
 
 
@@ -196,9 +196,26 @@ def campaign():
 	return render_template("campaigns.html", campaigns = campaign)
 
 
+@app.route("/characters/<int:charid>/rollers")
+@dec.login_required
+def rollers(charid):
+	char = db.Character.objects(charid=charid)[0]
+	return render_template("roller.html", rollers = char.rollers)
+	pass
+
+@app.route("/characters/<int:charid>/rollers/new")
+@dec.login_required
+@dec.charownershipcheck
+def newroller(charid):
+	inputs = request.form.to_dict()
+
+	rollerid = int(random.random() * 100000000000000000)
+	roller = db.Roller(rollerid = rollerid)
+	return redirect(url_for('rollers', charid = charid))
+
 @app.route("/help", methods=["GET"])
 def help():
-	return render_template("help.html")
+	return render_template("help.html")	
 	pass
 
 
