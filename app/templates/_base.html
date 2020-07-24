@@ -22,7 +22,7 @@
 
 
 	<link rel="shortcut icon" href="{{ url_for('static', filename='assets/favicon_chest.svg') }}">
-	
+
 
 	{% block head %}
 	{% endblock head %}
@@ -59,51 +59,54 @@
 		%}
 
 	{# navbar #}
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+		<div class="container-fluid">
 
-		<a class="navbar-brand" href="{{url_for('index')}}">
-			<img src="{{url_for('static', filename='assets/fullsize_chest.svg')}}" alt="" style="width:40px;">
-		</a>
+			<a class="navbar-brand" href="{{url_for('index')}}">
+				<img src="{{url_for('static', filename='assets/fullsize_chest.svg')}}" alt=""
+					style="width:40px;">
+			</a>
 
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			{% if not 'user' in session %}
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('help') }}">Help</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('login') }}">Log In</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('register') }}">Register</a>
-				</li>
-			</ul>
-			{% else %}
-			<!-- right elements -->
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('help') }}">Help</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{url_for('characters')}}">My Characters</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('campaign') }}">My Campaigns</a>
-				</li>
-			</ul>
-			<!-- left elements -->
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url_for('login') }}">Logout</a>
-				</li>
-			</ul>
-			{% endif %}
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				{% if not 'user' in session %}
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('help') }}">Help</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('login') }}">Log In</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('register') }}">Register</a>
+					</li>
+				</ul>
+				{% else %}
+				<!-- right elements -->
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('help') }}">Help</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{url_for('characters')}}">My Characters</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('campaign') }}">My Campaigns</a>
+					</li>
+				</ul>
+				<!-- left elements -->
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('login') }}">Logout</a>
+					</li>
+				</ul>
+				{% endif %}
+			</div>
 		</div>
 	</nav>
 
