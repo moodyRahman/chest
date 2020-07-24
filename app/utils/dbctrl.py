@@ -19,11 +19,20 @@ class Item(mg.EmbeddedDocument):
 	itemid = mg.IntField()
 
 
+class Roller(mg.EmbeddedDocument):
+	rollerid = mg.IntField()
+	name = mg.StringField()
+	dice = mg.ListField(mg.IntField)
+	modifier = mg.IntField()
+	pass
+
+
 class Character(mg.Document):
 	name = mg.StringField()
 	ptype = mg.StringField() # class
 	description = mg.StringField()
 	inventory = mg.EmbeddedDocumentListField(Item)
+	rollers = mg.EmbeddedDocumentListField(Roller)
 	charid = mg.IntField()
 	pass
 
