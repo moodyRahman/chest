@@ -15,7 +15,6 @@ else:
 
 
 
-app.secret_key = "debug"
 
 @app.route("/", methods=['GET'])
 @dec.login_required
@@ -141,7 +140,7 @@ def updatechar(charid):
 @dec.charownershipcheck
 def updateitem(charid):
 	inputs = request.form.to_dict()
-	char = db.Character.objects(charid = inputs["charid"])[0]
+	char = db.Character.objects(charid = charid)[0]
 	for x in char.inventory:
 		if x.itemid == int(inputs["itemid"]):
 			x.name = inputs["itemname"]
@@ -156,22 +155,22 @@ def updateitem(charid):
 @dec.charownershipcheck
 def deleteitem(charid):
 	inputs = request.form.to_dict()
-	char = db.Character.objects(charid=inputs["charid"])[0]
+	char = db.Character.objects(charid=charid)[0]
 	for x in char.inventory:
 		if x.itemid == int(inputs["itemid"]):
 			print("here")
 			char.inventory.remove(x)
 			# x.delete()
 			char.save()
-	return redirect(url_for("viewcharacter", charid=inputs["charid"]))
+	return redirect(url_for("viewcharacter", charid=charid))
 	pass
 
 @app.route("/characters/<int:charid>/delete", methods=["POST"])
 @dec.charownershipcheck
 def deletechar(charid):
 	inputs = request.form.to_dict()
-	char = db.Character.objects(charid = inputs["charid"])[0].pk
-	db.Character.objects(charid=inputs["charid"])[0].delete()
+	char = db.Character.objects(charid = charid)[0].pk
+	db.Character.objects(charid=charid)[0].delete()
 
 	user = db.UserInfo.objects(username=session["user"]).update_one(pull__allcharacters=char)
 	print(char)
@@ -200,7 +199,7 @@ def campaign():
 @dec.login_required
 def rollers(charid):
 	char = db.Character.objects(charid=charid)[0]
-	return render_template("roller.html", rollers = char.rollers)
+	return render_template("roller.html", char = char)
 	pass
 
 @app.route("/characters/<int:charid>/rollers/new")
