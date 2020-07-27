@@ -1,10 +1,98 @@
 {% extends "_base.html" %}
 {% block title %} Rollers | Chest {% endblock title %}
 
-{% block head %} {% endblock head %}
-{% block body %}
+{% block head %}
+<style>
+	.grid-container {
+		display: grid;
+		grid-template-columns: 1.8fr 0.2fr 0.2fr 1.8fr;
+		grid-template-rows: 1fr 0.3fr 1.7fr;
+		gap: 1px 1px;
+		grid-template-areas: "newroller . . bigi"". . . .""current-rollers current-rollers current-rollers current-rollers";
+	}
 
-<form action="{{url_for('')}}" method="post"></form>
+	.newroller {
+		grid-area: newroller;
+	}
+
+	.current-rollers {
+		grid-area: current-rollers;
+	}
+
+	.bigi {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-rows: 0.2fr 1.8fr;
+		gap: 1px 1px;
+		grid-template-areas: "inventitle inventitle inventitle""inventory inventory inventory";
+		grid-area: bigi;
+	}
+
+	.inventitle {
+		grid-area: inventitle;
+	}
+
+	.inventory {
+		grid-area: inventory;
+	}
+</style>
+
+
+{% endblock head %}
+{% block body %}
+<a href="{{url_for('viewcharacter', charid=char.charid)}}">
+	<button class="btn btn-dark">BACK TO CHAR</button> <br> <hr>
+</a>
+
+<div class="grid-container">
+	<div class="newroller">
+		<div class="container">
+			<input type="text" placeholder="roller name" class="form-control">
+			<input type="text" placeholder="dice" class="form-control">
+			<input type="text" placeholder="dice count" class="form-control"><br>
+		</div>
+		<button class="btn btn-dark btn-block">add another dice</button>
+	</div>
+	<div class="current-rollers">
+		JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD
+		<br>JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD
+		<br>JKFDGNDFKGSNFDKGNFDSGD
+		<br>JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD
+		<br>JKFDGNDFKGSNFDKGNFDSGD <br>
+	</div>
+	<div class="bigi">
+		<div class="inventitle"> The Inventory of {{char.name}}</div>
+		<div class="inventory">
+			<input type="text" name="" id="searchbox" class="form-control" placeholder="query your inventory">
+			<div style="overflow-y: scroll; height: 250px;">
+				<table class="table table-hover overflow-auto">
+					<tbody class="">
+
+						{% for item in char.inventory %}
+						<tr>
+							<!-- $('#descdisp').val('HEMCH') -->
+							<th class="inventoryrow"
+								onclick="inventoryclick(this)"
+								id="{{item.itemid}}" data-desc="{{item.description}}" data-name="{{item.name}}">
+								{{item.name}}
+							</th>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<br>
+			<div id="descdisp">
+				CLICK ON AN ITEM TO DISPLAY ITS DESCRIPTION
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script src="{{url_for('static', filename='js/rollersearch.js')}}"></script>
+
+
 
 
 {% endblock body %}
