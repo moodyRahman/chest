@@ -13,11 +13,6 @@ if environ["chest_debug"] == "true":
 else:
 	app.secret_key = urandom(32)
 
-app.config.update(
-    SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE='Lax',
-)
 
 
 @app.route("/", methods=['GET'])
