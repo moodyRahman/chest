@@ -11,7 +11,7 @@ app = Flask(__name__)
 if environ["chest_debug"] == "true":
 	app.secret_key = "debug"
 else:
-	app.secret_key = urandom(32)
+	app.secret_key = "debug"
 
 
 
