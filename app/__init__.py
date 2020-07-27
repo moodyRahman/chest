@@ -29,7 +29,7 @@ def index():
 
 
 @app.route("/login", methods=['GET', 'POST'])
-@dec.force_logout
+# @dec.force_logout
 def login():
 	if request.method == "POST":
 		inputs = request.form.to_dict()
