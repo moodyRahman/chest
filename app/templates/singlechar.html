@@ -24,6 +24,12 @@
 	<div>
 		<button class="btn btn-outline-info" style="vertical-align: right;" onclick="charupdate(this)">edit
 			character</button>
+
+		<a href="{{url_for('rollers', charid = char.charid)}}">
+			<button class="btn btn-outline-info float-right" style="vertical-align: right;">
+				Rollers
+			</button>
+		</a>
 	</div>
 
 </div>
