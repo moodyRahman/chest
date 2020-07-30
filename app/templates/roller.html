@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% from "macros/roller.macro.html" import roller%}
 {% block title %} Rollers | Chest {% endblock title %}
 
 {% block head %}
@@ -40,12 +41,13 @@
 
 {% endblock head %}
 {% block body %}
+
 <a href="{{url_for('viewcharacter', charid=char.charid)}}">
 	<button class="btn btn-dark">BACK TO CHAR</button> <br>
 	<hr>
 </a>
 
-<div class="grid-container">
+<div class="grid-container flex-column">
 	<div class="newroller">
 		<div class="container">
 			<form action="">
@@ -69,8 +71,8 @@
 					</div>
 
 					<div class="col-xs-6">
-						<input id="modifier" oninput="numonly(this)" type="number" name="modifier"
-							class="form-control" placeholder="modifier">
+						<input id="modifier" oninput="numonly(this)" type="number"
+							name="modifier" class="form-control" placeholder="modifier">
 					</div>
 				</div>
 
@@ -86,9 +88,25 @@
 		</div>
 	</div>
 	<div class="current-rollers">
-		{% for roller in char.rollers %}
-			{{roller.name}}
-		{% endfor %}
+		<div class="container">
+			<div class="row">
+
+				<div class="col">
+					{% for roll in char.rollers[::2] %}
+					
+					{{roller(roll)}}
+					{% endfor %}
+				</div>
+
+				<div class="col">
+					{% for roll in char.rollers[1::2] %}
+					
+					{{roller(roll)}}
+					{% endfor %}
+				</div>
+
+			</div>
+		</div>
 	</div>
 	<div class="bigi">
 		<div class="inventitle"> The Inventory of {{char.name}}</div>
