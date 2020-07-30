@@ -43,15 +43,15 @@ function rollersubmit() {
 		n = this.children[0].value
 		s = this.children[2].value
 
-		diceout.push(("n" + index) + n)
-		diceout.push(("s" + index) + s)
+		diceout.push(("n" + n) + "_" + index)
+		diceout.push(("s" + s) + "_" + index)
 	})
 
 	modifiersign = $("#dicemod").text()
 	modifier = $("#modifier").val()
 
 	data = {
-		newname: newname,
+		name: newname,
 		alldice: diceout,
 		sign: modifiersign,
 		modifier: modifier,
