@@ -86,11 +86,9 @@
 		</div>
 	</div>
 	<div class="current-rollers">
-		JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD
-		<br>JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD
-		<br>JKFDGNDFKGSNFDKGNFDSGD
-		<br>JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD
-		<br>JKFDGNDFKGSNFDKGNFDSGD <br>
+		{% for roller in char.rollers %}
+			{{roller.name}}
+		{% endfor %}
 	</div>
 	<div class="bigi">
 		<div class="inventitle"> The Inventory of {{char.name}}</div>
