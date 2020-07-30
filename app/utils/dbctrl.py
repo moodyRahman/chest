@@ -18,11 +18,14 @@ class Item(mg.EmbeddedDocument):
 	equipped = mg.BooleanField()
 	itemid = mg.IntField()
 
+class Dice(mg.EmbeddedDocument):
+	n = mg.IntField()
+	s = mg.IntField()
 
 class Roller(mg.EmbeddedDocument):
 	rollerid = mg.IntField()
 	name = mg.StringField()
-	dice = mg.ListField(mg.IntField)
+	dice = mg.EmbeddedDocumentListField(Dice)
 	modifier = mg.IntField()
 	pass
 
