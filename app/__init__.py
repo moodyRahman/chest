@@ -194,21 +194,43 @@ def campaign():
 	return render_template("campaigns.html", campaigns = campaign)
 
 
-@app.route("/characters/<int:charid>/rollers")
+@app.route("/characters/<int:charid>/rollers", methods=["GET"])
 @dec.login_required
 def rollers(charid):
 	char = db.Character.objects(charid=charid)[0]
 	return render_template("roller.html", char = char)
 	pass
 
-@app.route("/characters/<int:charid>/rollers/new")
+
+@app.route("/characters/<int:charid>/rollers/new", methods=["POST"])
 @dec.login_required
 @dec.charownershipcheck
 def newroller(charid):
 	inputs = request.form.to_dict()
-
 	rollerid = int(random.random() * 100000000000000000)
-	roller = db.Roller(rollerid = rollerid)
+	darray = inputs["alldice"].split(",")
+	try:
+		modifier = int(inputs["sign"] + inputs["modifier"])
+		
+	except ValueError:
+		flash("ur input be goofed bb", "danger")
+		return redirect(url_for("rollers", charid=charid))
+	
+	rollerdice = []
+	for n, x in enumerate(darray[::2]):
+		realpos = n*2
+		spos = realpos + 1
+		d = db.Dice(n=int(x[1]), s=int(darray[spos][1]))
+		rollerdice.append(d)
+		pass
+
+	r = db.Roller(name=inputs["name"], rollerid=rollerid, modifier=modifier, dice=rollerdice)
+
+	char = db.Character.objects(charid=charid)[0]
+	char.rollers.append(r)
+	char.save()
+
+	# return inputs
 	return redirect(url_for('rollers', charid = charid))
 
 @app.route("/help", methods=["GET"])
