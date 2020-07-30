@@ -41,17 +41,49 @@
 {% endblock head %}
 {% block body %}
 <a href="{{url_for('viewcharacter', charid=char.charid)}}">
-	<button class="btn btn-dark">BACK TO CHAR</button> <br> <hr>
+	<button class="btn btn-dark">BACK TO CHAR</button> <br>
+	<hr>
 </a>
 
 <div class="grid-container">
 	<div class="newroller">
 		<div class="container">
-			<input type="text" placeholder="roller name" class="form-control">
-			<input type="text" placeholder="dice" class="form-control">
-			<input type="text" placeholder="dice count" class="form-control"><br>
+			<form action="">
+
+				<input id="newname" type="text" placeholder="roller name" class="form-control">
+				<br>
+				<div id="dice">
+					<div class="input-group dice">
+						<input oninput="numonly(this)" name="dn-0" type="number"
+							placeholder="dice" class="dn form-control">
+						<span class="input-group-addon">&nbsp;d&nbsp;</span>
+						<input oninput="numonly(this)" name="ds-0" type="number"
+							placeholder="dice count" class="ds form-control"><br>
+					</div>
+				</div>
+				<br>
+
+				<div class="row">
+					<div class="col-xs-6">
+						<button id="dicemod" onclick="tominus(this)" class="btn">+</button>
+					</div>
+
+					<div class="col-xs-6">
+						<input id="modifier" oninput="numonly(this)" type="number" name="modifier"
+							class="form-control" placeholder="modifier">
+					</div>
+				</div>
+
+
+			</form>
+
+			<button onclick="newelem(this)" class="btn btn-dark btn-block">add another dice</button>
+
+			<hr>
+			<button class="btn" onclick="rollersubmit(this)">
+				SUBMIT ROLLER
+			</button>
 		</div>
-		<button class="btn btn-dark btn-block">add another dice</button>
 	</div>
 	<div class="current-rollers">
 		JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD <br>JKFDGNDFKGSNFDKGNFDSGD
@@ -63,7 +95,8 @@
 	<div class="bigi">
 		<div class="inventitle"> The Inventory of {{char.name}}</div>
 		<div class="inventory">
-			<input type="text" name="" id="searchbox" class="form-control" placeholder="query your inventory">
+			<input type="text" name="" id="searchbox" class="form-control"
+				placeholder="query your inventory">
 			<div style="overflow-y: scroll; height: 250px;">
 				<table class="table table-hover overflow-auto">
 					<tbody class="">
@@ -71,9 +104,9 @@
 						{% for item in char.inventory %}
 						<tr>
 							<!-- $('#descdisp').val('HEMCH') -->
-							<th class="inventoryrow"
-								onclick="inventoryclick(this)"
-								id="{{item.itemid}}" data-desc="{{item.description}}" data-name="{{item.name}}">
+							<th class="inventoryrow" onclick="inventoryclick(this)"
+								id="{{item.itemid}}" data-desc="{{item.description}}"
+								data-name="{{item.name}}">
 								{{item.name}}
 							</th>
 						</tr>
@@ -89,9 +122,13 @@
 	</div>
 </div>
 
-
+<script>
+	rollerurl = "{{url_for('newroller', charid=char.charid) | safe}}";
+	charid = {{ char.charid | safe }};
+</script>
+<script src="{{url_for('static', filename='js/post.js')}}"></script>
 <script src="{{url_for('static', filename='js/rollersearch.js')}}"></script>
-
+<script src="{{url_for('static', filename='js/newroller.js')}}"></script>
 
 
 
