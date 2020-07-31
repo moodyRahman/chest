@@ -35,12 +35,12 @@ def charownershipcheck(route):
 		if request.method == "POST":
 			inputs = request.form.to_dict()
 			user = db.UserInfo.objects(username = session["user"])[0]
-			inputcharid = int(inputs["charid"])
+			inputcharid = kwargs["charid"]
 			if inputcharid in [x.charid for x in user.allcharacters]:
 				print("THE USER IS VERIFIED")
 				return route(*args, **kwargs)
 			else:
-				flash("you're not verified fool", "warning")
+				flash("you're engaged in some bad juju. quit it.", "warning")
 				return redirect(url_for("login"))
 		else:
 			return route(*args, **kwargs)
