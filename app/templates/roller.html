@@ -67,7 +67,7 @@
 
 				<div class="row">
 					<div class="col-xs-6">
-						<button id="dicemod" onclick="tominus(this)" class="btn">+</button>
+						<button id="dicemod" onclick="tominus(this)" class="btn btn-dark">+</button>
 					</div>
 
 					<div class="col-xs-6">
@@ -75,6 +75,7 @@
 							name="modifier" class="form-control" placeholder="modifier">
 					</div>
 				</div>
+				<br>
 
 
 			</form>
@@ -83,7 +84,7 @@
 
 			<hr>
 			<button class="btn" onclick="rollersubmit(this)">
-				SUBMIT ROLLER
+				UPLOAD ROLLER
 			</button>
 		</div>
 	</div>
@@ -92,14 +93,14 @@
 			<div class="row">
 
 				<div class="col">
-					{% for roll in char.rollers[::2] %}
+					{% for roll in char.rollers[::-2] %}
 					
 					{{roller(roll)}}
 					{% endfor %}
 				</div>
 
 				<div class="col">
-					{% for roll in char.rollers[1::2] %}
+					{% for roll in char.rollers[-2::-2] %}
 					
 					{{roller(roll)}}
 					{% endfor %}
@@ -140,12 +141,29 @@
 
 <script>
 	rollerurl = "{{url_for('newroller', charid=char.charid) | safe}}";
+	rollersdeleteurl = "{{url_for('deleteroller', charid=char.charid) | safe}}";
 	charid = {{ char.charid | safe }};
 </script>
 <script src="{{url_for('static', filename='js/post.js')}}"></script>
 <script src="{{url_for('static', filename='js/rollersearch.js')}}"></script>
 <script src="{{url_for('static', filename='js/newroller.js')}}"></script>
+<script>
 
+	function deleteask(self){
+		console.log("<button id=" + $(self).attr("id") + " class='btn btn-warning' onclick='rollerdeletefr(this)'>are you sure?</button>")
+		$(self).replaceWith("<button id=" + $(self).attr("id") + " class='btn btn-warning' onclick='rollerdeletefr(this)'>are you sure?</button>")
+	}
+
+	function rollerdeletefr(self){
+		console.log($(self).attr("id"))
+		data = {
+			rollerid: $(self).attr("id"), 
+			charid:charid
+		};
+
+		post(rollersdeleteurl, data)
+	}
+</script>
 
 
 {% endblock body %}

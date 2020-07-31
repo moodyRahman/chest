@@ -24,8 +24,8 @@ function numonly(self) {
 	// console.log(self.value)
 }
 
-const plus = '<button id="dicemod" onclick="tominus(this)" class="btn">+</button>'
-const minus = '<button id="dicemod" onclick="toplus(this)" class="btn">-</button>'
+const plus = '<button id="dicemod" onclick="tominus(this)" class="btn btn-dark">+</button>'
+const minus = '<button id="dicemod" onclick="toplus(this)" class="btn btn-dark">-</button>'
 function tominus(self) {
 	$(self).replaceWith(minus)
 	event.preventDefault()

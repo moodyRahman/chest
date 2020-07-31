@@ -233,6 +233,20 @@ def newroller(charid):
 	# return inputs
 	return redirect(url_for('rollers', charid = charid))
 
+
+@app.route("/characters/<int:charid>/rollers/delete", methods=["POST"])
+@dec.login_required
+@dec.charownershipcheck
+def deleteroller(charid):
+	inputs = request.form.to_dict()
+	char = db.Character.objects(charid=charid)[0]
+	for roller in char.rollers:
+		if roller.rollerid == int(inputs["rollerid"]):
+			print("HERE")
+			char.rollers.remove(roller)
+			char.save()
+	return redirect(url_for("rollers", charid=charid))
+
 @app.route("/help", methods=["GET"])
 def help():
 	return render_template("help.html")	
