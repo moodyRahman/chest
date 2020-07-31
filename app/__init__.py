@@ -205,22 +205,16 @@ def rollers(charid):
 @app.route("/characters/<int:charid>/rollers/new", methods=["POST"])
 @dec.login_required
 @dec.charownershipcheck
+@dec.diceverify
 def newroller(charid):
 	inputs = request.form.to_dict()
 	rollerid = int(random.random() * 100000000000000000)
 	darray = inputs["alldice"].split(",")
-	try:
-		modifier = int(inputs["sign"] + inputs["modifier"])
-		
-	except ValueError:
-		flash("ur input be goofed bb", "danger")
-		return redirect(url_for("rollers", charid=charid))
-	
 	rollerdice = []
 	for n, x in enumerate(darray[::2]):
 		realpos = n*2
 		spos = realpos + 1
-		d = db.Dice(n=int(x[1]), s=int(darray[spos][1]))
+		d = db.Dice(n=int(x.split("_")[1]), s=int(darray[spos].split("_")[1]))
 		rollerdice.append(d)
 		pass
 

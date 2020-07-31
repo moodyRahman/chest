@@ -46,3 +46,15 @@ def charownershipcheck(route):
 			return route(*args, **kwargs)
 	
 	return wrapper
+
+
+def diceverify(route):
+	@wraps(route)
+	def wrapper(*args, **kwargs):
+		try:
+			return route(*args, **kwargs)
+		except ValueError:
+			flash("you gotta put in numebers", "danger")
+			return redirect(url_for("rollers", charid = kwargs["charid"]))
+
+	return wrapper

@@ -43,8 +43,8 @@ function rollersubmit() {
 		n = this.children[0].value
 		s = this.children[2].value
 
-		diceout.push(("n" + n) + "_" + index)
-		diceout.push(("s" + s) + "_" + index)
+		diceout.push(("n_" + n) + "_" + index)
+		diceout.push(("s_" + s) + "_" + index)
 	})
 
 	modifiersign = $("#dicemod").text()
