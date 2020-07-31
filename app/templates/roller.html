@@ -147,23 +147,7 @@
 <script src="{{url_for('static', filename='js/post.js')}}"></script>
 <script src="{{url_for('static', filename='js/rollersearch.js')}}"></script>
 <script src="{{url_for('static', filename='js/newroller.js')}}"></script>
-<script>
-
-	function deleteask(self){
-		console.log("<button id=" + $(self).attr("id") + " class='btn btn-warning' onclick='rollerdeletefr(this)'>are you sure?</button>")
-		$(self).replaceWith("<button id=" + $(self).attr("id") + " class='btn btn-warning' onclick='rollerdeletefr(this)'>are you sure?</button>")
-	}
-
-	function rollerdeletefr(self){
-		console.log($(self).attr("id"))
-		data = {
-			rollerid: $(self).attr("id"), 
-			charid:charid
-		};
-
-		post(rollersdeleteurl, data)
-	}
-</script>
+<script src="{{url_for('static', filename='js/rollerdelete.js')}}"></script>
 
 
 {% endblock body %}
