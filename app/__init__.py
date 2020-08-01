@@ -211,6 +211,7 @@ def newroller(charid):
 	rollerid = int(random.random() * 100000000000000000)
 	darray = inputs["alldice"].split(",")
 	rollerdice = []
+	modifier = int(inputs["modifier"])
 	for n, x in enumerate(darray[::2]):
 		realpos = n*2
 		spos = realpos + 1
