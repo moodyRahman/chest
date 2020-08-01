@@ -6,35 +6,39 @@
 <style>
 	.grid-container {
 		display: grid;
-		grid-template-columns: 1.8fr 0.2fr 0.2fr 1.8fr;
-		grid-template-rows: 1fr 0.3fr 1.7fr;
+		grid-template-columns: 1.5fr 0.5fr 1fr 1fr 0.8fr 0.5fr 1.7fr;
+		grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 		gap: 1px 1px;
-		grid-template-areas: "newroller . . bigi"". . . .""current-rollers current-rollers current-rollers current-rollers";
-	}
-
-	.newroller {
-		grid-area: newroller;
+		grid-template-areas: "sidenav . newroller newroller newroller . bigi""sidenav . newroller newroller newroller . bigi""sidenav . newroller newroller newroller . bigi""sidenav . newroller newroller newroller . bigi""sidenav . . . . . .""sidenav . current-rollers current-rollers current-rollers current-rollers current-rollers""sidenav . current-rollers current-rollers current-rollers current-rollers current-rollers""sidenav . current-rollers current-rollers current-rollers current-rollers current-rollers";
 	}
 
 	.current-rollers {
 		grid-area: current-rollers;
 	}
 
+	.newroller {
+		grid-area: newroller;
+	}
+
 	.bigi {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
-		grid-template-rows: 0.2fr 1.8fr;
+		grid-template-rows: 1.3fr 0.7fr;
 		gap: 1px 1px;
-		grid-template-areas: "inventitle inventitle inventitle""inventory inventory inventory";
+		grid-template-areas: "inventory inventory inventory""inventitle inventitle inventitle";
 		grid-area: bigi;
+	}
+
+	.inventory {
+		grid-area: inventory;
 	}
 
 	.inventitle {
 		grid-area: inventitle;
 	}
 
-	.inventory {
-		grid-area: inventory;
+	.sidenav {
+		grid-area: sidenav;
 	}
 </style>
 
@@ -47,83 +51,80 @@
 	<hr>
 </a>
 
-<div class="grid-container flex-column">
+<div class="grid-container">
+	<div class="current-rollers">
+		<div class="container">
+			<div class="row">
+		
+				<div class="col">
+					{% for roll in char.rollers[::-2] %}
+		
+					{{roller(roll)}}
+					{% endfor %}
+				</div>
+		
+				<div class="col">
+					{% for roll in char.rollers[-2::-2] %}
+		
+					{{roller(roll)}}
+					{% endfor %}
+				</div>
+		
+			</div>
+		</div>
+	</div>
 	<div class="newroller">
 		<div class="container">
 			<form action="">
-
+		
 				<input id="newname" type="text" placeholder="roller name" class="form-control">
 				<br>
 				<div id="dice">
 					<div class="input-group dice">
-						<input oninput="numonly(this)" name="dn-0" type="number"
-							placeholder="dice" class="dn form-control">
+						<input oninput="numonly(this)" name="dn-0" type="number" placeholder="dice"
+							class="dn form-control">
 						<span class="input-group-addon">&nbsp;d&nbsp;</span>
-						<input oninput="numonly(this)" name="ds-0" type="number"
-							placeholder="dice count" class="ds form-control"><br>
+						<input oninput="numonly(this)" name="ds-0" type="number" placeholder="dice count"
+							class="ds form-control"><br>
 					</div>
 				</div>
 				<br>
-
+		
 				<div class="row">
 					<div class="col-xs-6">
 						<button id="dicemod" onclick="tominus(this)" class="btn btn-dark">+</button>
 					</div>
-
+		
 					<div class="col-xs-6">
-						<input id="modifier" oninput="numonly(this)" type="number"
-							name="modifier" class="form-control" placeholder="modifier">
+						<input id="modifier" oninput="numonly(this)" type="number" name="modifier"
+							class="form-control" placeholder="modifier">
 					</div>
 				</div>
 				<br>
-
-
+		
+		
 			</form>
-
+		
 			<button onclick="newelem(this)" class="btn btn-dark btn-block">add another dice</button>
-
+		
 			<hr>
 			<button class="btn" onclick="rollersubmit(this)">
 				UPLOAD ROLLER
 			</button>
 		</div>
 	</div>
-	<div class="current-rollers">
-		<div class="container">
-			<div class="row">
-
-				<div class="col">
-					{% for roll in char.rollers[::-2] %}
-					
-					{{roller(roll)}}
-					{% endfor %}
-				</div>
-
-				<div class="col">
-					{% for roll in char.rollers[-2::-2] %}
-					
-					{{roller(roll)}}
-					{% endfor %}
-				</div>
-
-			</div>
-		</div>
-	</div>
 	<div class="bigi">
-		<div class="inventitle"> The Inventory of {{char.name}}</div>
 		<div class="inventory">
-			<input type="text" name="" id="searchbox" class="form-control"
-				placeholder="query your inventory">
+			<input type="text" name="" id="searchbox" class="form-control" placeholder="query your inventory">
 			<div style="overflow-y: scroll; height: 250px;">
 				<table class="table table-hover overflow-auto">
 					<tbody class="">
-
+			
 						{% for item in char.inventory %}
 						<tr>
 							<!-- $('#descdisp').val('HEMCH') -->
-							<th class="inventoryrow" onclick="inventoryclick(this)"
-								id="{{item.itemid}}" data-desc="{{item.description}}"
-								data-name="{{item.name}}">
+							<th class="inventoryrow" onclick="inventoryclick(this)" id="{{item.itemid}}"
+								data-desc="{{item.description}}" data-name="{{item.name}}">
 								{{item.name}}
 							</th>
 						</tr>
@@ -136,14 +137,21 @@
 				CLICK ON AN ITEM TO DISPLAY ITS DESCRIPTION
 			</div>
 		</div>
+		<div class="inventitle">
+		</div>
+	</div>
+	<div class="sidenav" id="allroller" style="background-color: rebeccapurple;">
+	
 	</div>
 </div>
+
 
 <script>
 	rollerurl = "{{url_for('newroller', charid=char.charid) | safe}}";
 	rollersdeleteurl = "{{url_for('deleteroller', charid=char.charid) | safe}}";
 	charid = {{ char.charid | safe }};
 </script>
+<script src="{{url_for('static', filename='js/rollerdice.js')}}"></script>
 <script src="{{url_for('static', filename='js/post.js')}}"></script>
 <script src="{{url_for('static', filename='js/rollersearch.js')}}"></script>
 <script src="{{url_for('static', filename='js/newroller.js')}}"></script>
