@@ -26,8 +26,8 @@ function drawdice(data){
 
 	var cardtemplate = $(`
 	<div class="card py-0 text-white bg-dark" id="card_${data["id"]}" style="max-width: 100%;">
-		<h4 class="card-title">${data["name"]}</h4>
 		<div class="card-body">
+			${data["name"]}
 			<p class="card-text">${cumsum + parseInt(data["modifier"])}</p>
 		</div>
 	</div>
@@ -109,4 +109,8 @@ function roll(self) {
 	$("#modal_" + data["id"]).on('hidden.bs.modal', function () {
 		$(this).remove()
 	})
+
+	res["card"].get(0).scrollIntoView();
+	window.scrollBy(-100, 0)
+
 }
