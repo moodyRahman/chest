@@ -57,6 +57,7 @@ class UserInfo(mg.Document):
 	username = mg.StringField()
 	hashed_password = mg.StringField()
 	salt = mg.StringField()
+	rank = mg.StringField()
 	allcharacters = mg.ListField(
 		mg.ReferenceField("Character"), reverse_delete_rule=mg.CASCADE)
 	allcampaigns = mg.ListField(mg.ReferenceField("Campaign"))

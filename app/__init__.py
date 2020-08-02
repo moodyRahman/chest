@@ -74,7 +74,7 @@ def register():
 		
 		hashedpassword = hashlib.sha512(
 		(pw0 + salt).encode("utf-8")).digest().hex()
-		newuser = db.UserInfo(username=username, hashed_password=hashedpassword, salt=salt).save()
+		newuser = db.UserInfo(username=username, hashed_password=hashedpassword, salt=salt, rank="user").save()
 		session["user"] = username
 		return redirect(url_for("index"))
 	return render_template("register.html")
