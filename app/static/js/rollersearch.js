@@ -23,7 +23,7 @@ $("#searchbox").on("input", function (self) {
 			return
 		}
 
-		name = this.dataset.name
+		var name = this.dataset.name
 
 		if (isvalidsearchroller(query, name)) {
 			this.style.display = ""
