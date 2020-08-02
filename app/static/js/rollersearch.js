@@ -1,6 +1,6 @@
 function isvalidsearchroller(query, name) {
-	name = name.toLowerCase()
-	query = query.toLowerCase()
+	var name = name.toLowerCase()
+	var query = query.toLowerCase()
 	if (name.includes(query)) {
 		return true;
 	}
@@ -8,14 +8,14 @@ function isvalidsearchroller(query, name) {
 }
 
 function inventoryclick(self) {
-	name = self.dataset.name
-	desc = self.dataset.desc
+	var name = self.dataset.name
+	var desc = self.dataset.desc
 	$('#descdisp').text(name + ": "  + desc)
 }
 
 $("#searchbox").on("input", function (self) {
 	console.clear()
-	query = $("#searchbox").val().toLowerCase()
+	var query = $("#searchbox").val().toLowerCase()
 
 	$(".inventoryrow").each(function (index) {
 		if (query === "") {

@@ -1,5 +1,5 @@
 function deleteitem(elem) {
-	self = $(elem);
+	var self = $(elem);
 
 	console.log(self)
 	self.html("ARE YOU SURE?")
@@ -8,14 +8,14 @@ function deleteitem(elem) {
 }
 
 function deleteitemfr(elem) {
-	self = $(elem);
-	itemid = self.attr("id");
-	itemnamenode = $("#" + itemid + "_name")
-	itemdescriptionnode = $("#" + itemid + "_description")
-	itemname = itemnamenode.text()
-	description = itemdescriptionnode.text()
+	var self = $(elem);
+	var itemid = self.attr("id");
+	var itemnamenode = $("#" + itemid + "_name")
+	var itemdescriptionnode = $("#" + itemid + "_description")
+	var itemname = itemnamenode.text()
+	var description = itemdescriptionnode.text()
 
-	data = {
+	var data = {
 		"itemid": itemid,
 		"charid": charid,
 		"itemname": itemname,

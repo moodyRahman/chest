@@ -5,7 +5,7 @@ function deleteask(self) {
 
 function rollerdeletefr(self) {
 	console.log($(self).attr("id"))
-	data = {
+	var data = {
 		rollerid: $(self).attr("id"),
 		charid: charid
 	};

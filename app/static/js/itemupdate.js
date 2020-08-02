@@ -1,18 +1,18 @@
 function itemeditor(elem) {
-	self = $(elem);
-	itemid = self.attr("id");
-	itemnamenode = $("#" + itemid + "_name")
-	itemdescriptionnode = $("#" + itemid + "_description")
+	var self = $(elem);
+	var itemid = self.attr("id");
+	var itemnamenode = $("#" + itemid + "_name")
+	var itemdescriptionnode = $("#" + itemid + "_description")
 
-	itemnamefield = $('<input type="text" style="height:100%; display : inline; border: 2px solid red; border-radius: 10px;" class="form-control md-form" />')
+	var itemnamefield = $('<input type="text" style="height:100%; display : inline; border: 2px solid red; border-radius: 10px;" class="form-control md-form" />')
 	// itemnamefield = $('<textarea style="display : inline;" class="form-control md-form" />')
-	itemnamefield.val(itemnamenode.text())
-	itemnamefield.attr("id", itemid + "_name")
+	var itemnamefield.val(itemnamenode.text())
+	var itemnamefield.attr("id", itemid + "_name")
 
 	// itemdescfield = $(('<input type="text" style="height:100px; display : inline;" class="form-control md-form" />'))
-	itemdescfield = $('<textarea style="display : inline; border: 2px solid red; border-radius: 10px;" rows="2" class="form-control md-form" />')
-	itemdescfield.attr("id", itemid + "_description")
-	itemdescfield.val(itemdescriptionnode.text())
+	var itemdescfield = $('<textarea style="display : inline; border: 2px solid red; border-radius: 10px;" rows="2" class="form-control md-form" />')
+	var itemdescfield.attr("id", itemid + "_description")
+	var itemdescfield.val(itemdescriptionnode.text())
 
 	console.log(itemnamenode.prop("tagName"))
 
@@ -38,16 +38,16 @@ function itemeditor(elem) {
 
 
 function updateitem(elem) {
-	self = $(elem);
-	itemid = self.attr("id");
-	itemnamenode = $("#" + itemid + "_name")
-	itemdescriptionnode = $("#" + itemid + "_description")
+	var self = $(elem);
+	var itemid = self.attr("id");
+	var itemnamenode = $("#" + itemid + "_name")
+	var itemdescriptionnode = $("#" + itemid + "_description")
 	
 	console.log(itemnamenode)
 	console.log(itemdescriptionnode)
 
-	itemname = itemnamenode.val()
-	description = itemdescriptionnode.val()
+	var itemname = itemnamenode.val()
+	var description = itemdescriptionnode.val()
 
 	
 	data = {

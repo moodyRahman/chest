@@ -18,7 +18,7 @@ function isvalidsearch(query, name, description, tags){
 
 $("#searchbox").on("input", function(self){
 	console.clear()
-	query = $("#searchbox").val().toLowerCase()
+	var query = $("#searchbox").val().toLowerCase()
 	$(".inventoryrow").each(function( index ){
 		if (query === ""){
 			this.style.display = ""

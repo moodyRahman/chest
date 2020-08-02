@@ -1,7 +1,7 @@
 function chardelete(self){
 	console.log(self)
 
-	data = {
+	var data = {
 		charid:charid
 	}
 

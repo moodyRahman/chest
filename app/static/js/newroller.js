@@ -37,8 +37,8 @@ function toplus(self) {
 }
 
 function rollersubmit() {
-	newname = $("#newname").val()
-	diceout = []
+	var newname = $("#newname").val()
+	var diceout = []
 	$(".dice").each(function (index) {
 		n = this.children[0].value
 		s = this.children[2].value
@@ -47,10 +47,10 @@ function rollersubmit() {
 		diceout.push(("s_" + s) + "_" + index)
 	})
 
-	modifiersign = $("#dicemod").text()
-	modifier = $("#modifier").val()
+	var modifiersign = $("#dicemod").text()
+	var modifier = $("#modifier").val()
 
-	data = {
+	var data = {
 		name: newname,
 		alldice: diceout,
 		sign: modifiersign,
