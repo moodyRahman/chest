@@ -7,7 +7,7 @@ The app is designed to be lightweight and to maximize support for homebrew chara
 Many other TRPG inventory managers are bulky, heavy, and do questionable things with their userdata, and gear only towards the offical list of items. Chest is designed to be homebrew first, and all of the userdata is self-hosted. 
 
 #### How to use Chest
-Go to https://chest-nightly.herokuapp.com/  
+https://chestdnd.com  
 Register a new account.  
 The source code is open! All passwords are hashed and salted and no other user information is stored other than what is exactly put into Chest.
 
