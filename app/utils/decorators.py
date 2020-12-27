@@ -54,7 +54,7 @@ def diceverify(route):
 		try:
 			return route(*args, **kwargs)
 		except ValueError:
-			flash("you gotta put in numebers", "danger")
+			flash("Invalid dice values", "danger")
 			return redirect(url_for("rollers", charid = kwargs["charid"]))
 
 	return wrapper
