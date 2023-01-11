@@ -1,0 +1,8 @@
+version: '3'
+services:
+  chest:
+    image: chest:main
+    build: .
+    ports:
+      - "8000:8000"
+  

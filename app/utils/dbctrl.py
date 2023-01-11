@@ -1,11 +1,7 @@
 import mongoengine as mg
-from os import environ
+from os import getenv
 
-if environ["chest_debug"] == "true":
-	mg.connect("sitedata")
-else:
-	mg.connect("sitedata", 
-		host=environ["atlasurl"])
+mg.connect("sitedata", host=getenv("ATLASURL"))
 
 
 

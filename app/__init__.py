@@ -1,17 +1,16 @@
 from flask import *
 from .utils import dbctrl as db
 from .utils import decorators as dec 
-from os import urandom, environ
+from os import urandom, getenv
 import hashlib
 import random
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 
 
-if environ["chest_debug"] == "true":
-	app.secret_key = "debug"
-else:
-	app.secret_key = "debug"
+app.secret_key = getenv("FLASKSECRET")
 
 
 
@@ -255,4 +254,4 @@ def deb():
 	return render_template("debug.html")
 
 if __name__ == "__main__":
-	app.run()
+	app.run(host="0.0.0.0", port="8082")
