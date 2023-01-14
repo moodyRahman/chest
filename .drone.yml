@@ -3,8 +3,19 @@ type: docker
 name: chest
 
 steps:
-- name: greeting
+- name: build
   image: python:latest
   commands:
   - pip3 install -r requirements.txt
-  - gunicorn -w 1 -b 0.0.0.0:8000 --daemon app:app
+- name: deploy
+  image: docker:dind
+  commands:
+  - pwd
+  - docker ps
+
+
+
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
