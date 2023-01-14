@@ -4,7 +4,7 @@ name: chest
 
 steps:
 - name: greeting
-  image: python3
+  image: python3:latest
   commands:
   - echo hello
   - echo world
