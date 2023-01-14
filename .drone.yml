@@ -1,0 +1,10 @@
+kind: pipeline
+type: docker
+name: chest
+
+steps:
+- name: greeting
+  image: python3
+  commands:
+  - echo hello
+  - echo world
