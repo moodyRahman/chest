@@ -6,6 +6,5 @@ steps:
 - name: greeting
   image: python:latest
   commands:
-  - echo hello
-  - echo world
-  - docker compose up -d
+  - pip3 install -r requirements.txt
+  - gunicorn -w 1 -b 0.0.0.0:8000 app:app
